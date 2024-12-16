@@ -18,7 +18,7 @@ export default function About() {
         <h2 className="text-3xl font-bold mb-6 text-center">LEARN MORE ABOUT ME</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex justify-center">
-            <Image src="/profile-image.jpg" alt="Rikam Palkar" width={300} height={300} className="rounded-lg" />
+            <Image src="/profile-image.jpg" alt="Daniel Rondón García" width={300} height={300} className="rounded-lg" />
           </div>
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-green-400 text-center md:text-left">Software Engineer</h3>

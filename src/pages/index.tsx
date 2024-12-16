@@ -25,8 +25,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 to-black text-white relative overflow-hidden">
       <Head>
-        <title>Rikam Palkar - Portfolio</title>
-        <meta name="description" content="Rikam Palkar's portfolio" />
+        <title>Daniel Rondón García - Portfolio</title>
+        <meta name="description" content="Daniel Rondón García's portfolio" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
       </Head>
@@ -66,7 +66,7 @@ export default function Home() {
         </main>
 
         <footer className="text-right py-4 text-sm text-gray-400">
-          <p>Designed & Licensed by Rikam Palkar</p>
+          <p>Designed & Licensed by Daniel Rondón García</p>
         </footer>
       </div>
     </div>

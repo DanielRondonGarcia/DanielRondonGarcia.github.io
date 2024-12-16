@@ -47,7 +47,7 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold">
-            <button onClick={() => setActiveSection('home')}>Rikam Palkar</button>
+            <button onClick={() => setActiveSection('home')}>Daniel Rondón García</button>
           </div>
           {renderNavItems()}
         </div>
