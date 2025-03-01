@@ -1,15 +1,24 @@
 import Image from 'next/image'
+import md5 from 'md5'
 
 export default function About() {
+  const email = process.env.NEXT_PUBLIC_EMAIL || ''
+  const gravatarHash = md5(email.toLowerCase().trim())
+  const gravatarUrl = `https://www.gravatar.com/avatar/${gravatarHash}?s=300`
+
   const skills = [
     { name: '.NET', level: 90 },
     { name: 'C#', level: 80 },
-    { name: 'WPF', level: 70 },
     { name: 'BLAZOR', level: 70 },
     { name: 'HTML', level: 50 },
     { name: 'CSS', level: 50 },
     { name: 'WEBAPI', level: 60 },
-    { name: 'DATA STRUCTURE & ALGORITHMS', level: 80 },
+    { name: 'DevOps', level: 80 },
+    { name: 'Unit Testing', level: 70 },
+    { name: 'Automation', level: 90 },
+    { name: 'SQL', level: 70 },
+    { name: 'Docker', level: 80 },
+    { name: 'Kubernetes', level: 70 },    
   ]
 
   return (
@@ -17,22 +26,21 @@ export default function About() {
       <section>
         <h2 className="text-3xl font-bold mb-6 text-center">LEARN MORE ABOUT ME</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="flex justify-center">
-            <Image src="/profile-image.jpg" alt="Daniel Rondón García" width={300} height={300} className="rounded-lg" />
+        <div className="flex justify-center">
+            <Image 
+              src={gravatarUrl} 
+              alt={process.env.NEXT_PUBLIC_NAME || 'Profile Picture'}
+              width={300} 
+              height={300} 
+              className="rounded-full object-cover"
+            />
           </div>
           <div className="space-y-4">
-            <h3 className="text-2xl font-semibold text-green-400 text-center md:text-left">Software Engineer</h3>
+            <h3 className="text-2xl font-semibold text-green-400 text-center md:text-left">{process.env.NEXT_PUBLIC_OCCUPATION}</h3>
             <div className="grid grid-cols-1 gap-4">
-              <p><span className="font-semibold">Degree:</span> Master of Computer Application</p>
-              <p><span className="font-semibold">College:</span> VJTI</p>
-              <p><span className="font-semibold">My books:</span> Blazor Simplified, WPF Simplified</p>
-              <p><span className="font-semibold">Achievement:</span> Verified author on Medium</p>
-              <p><span className="font-semibold">Award:</span> Most Valuable Professional C#Corner</p>
-              <p><span className="font-semibold">Nomination:</span> LinkedIn Creator's program</p>
-              <p><span className="font-semibold">Medium:</span> Verified Author</p>
-              <p><span className="font-semibold">City:</span> Mumbai, India</p>
-              <p><span className="font-semibold">LinkedIn:</span> Top Voice</p>
-              <p><span className="font-semibold">Creator at:</span> DSA Simplified</p>
+              <p><span className="font-semibold">Degree:</span> {process.env.NEXT_PUBLIC_DEGREE}</p>
+              <p><span className="font-semibold">College:</span> {process.env.NEXT_PUBLIC_COLLEGE}</p>
+              <p><span className="font-semibold">City:</span> {process.env.NEXT_PUBLIC_LOCATION}</p>
             </div>
           </div>
         </div>
