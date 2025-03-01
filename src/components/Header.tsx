@@ -15,8 +15,8 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
     { href: 'articles', label: 'Articles' },
     { href: 'dsa-simplified', label: 'DSA Simplified' },
     { href: 'contact', label: 'Contact' },
-  ]
 
+  ]
   const renderNavItems = () => (
     <ul className="flex flex-wrap justify-center space-x-4 text-sm">
       {navItems.map((item) => (
@@ -38,7 +38,7 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
   )
 
   return (
-    <header 
+    <header
       className={`
         fixed left-0 right-0 top-0 z-50 transition-all duration-500 ease-in-out
         ${activeSection !== 'home' || isScrolled ? 'bg-black' : 'bg-transparent'}
@@ -47,7 +47,9 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold">
-            <button onClick={() => setActiveSection('home')}>Daniel Rondón García</button>
+            {activeSection !== 'home' && (
+              <button onClick={() => setActiveSection('home')}>Daniel Rondón García</button>
+            )}
           </div>
           {renderNavItems()}
         </div>

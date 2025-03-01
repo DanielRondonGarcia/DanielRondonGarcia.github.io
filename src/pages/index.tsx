@@ -35,7 +35,7 @@ export default function Home() {
 
       <Header activeSection={activeSection} setActiveSection={setActiveSection} isScrolled={isScrolled} />
 
-      <div className="container mx-auto px-4 py-8 relative z-10 flex flex-col min-h-screen">
+      <div className={`container mx-auto px-4 py-8 relative z-10 flex flex-col min-h-screen ${activeSection !== 'home' ? 'mt-20' : ''}`}>
         <main className="flex-grow flex flex-col justify-center">
           <div className={`transition-opacity duration-500 ${activeSection === 'home' ? 'opacity-100' : 'opacity-0 hidden'}`}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
