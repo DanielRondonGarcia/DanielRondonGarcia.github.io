@@ -6,8 +6,8 @@ export default function Introduction() {
       <h1 className="text-6xl font-bold mb-4">{process.env.NEXT_PUBLIC_NAME}</h1>
       <p className="text-xl mb-4">
         I'm a passionate system engineer,<br />
-        & an automation virtuoso, weaving security into every pipeline,
-        like an award-winning author crafting resilience and efficiency.
+        and an automation virtuoso, weaving security into every pipeline,
+        crafting resilience and efficiency like an award-winning author.
       </p>
       <p className="text-lg mb-2">
         Dive into, <Link href="#" className="text-[var(--primary-color)] hover:underline">DevSecOps</Link>
