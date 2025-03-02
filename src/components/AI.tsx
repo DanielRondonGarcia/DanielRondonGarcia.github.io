@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import ContentCard from './ContentCard';
 import { sendMessage, loadPreviousSession, Message, MessageRole, ChatApiError } from '../utils/chatApi';
+import { Toaster, toast } from 'react-hot-toast';
 
 interface ChatState {
   messages: Message[];
   isLoading: boolean;
   sessionId: string;
-  error: string | null;
+  error: Error | null;  // Change error type to Error | null
 }
 
 const INITIAL_STATE: ChatState = {
@@ -60,6 +61,14 @@ const AI: React.FC = () => {
   // Initialize chat
   useEffect(() => {
     if (!sessionId) {
+      const errorMessage = error instanceof ChatApiError 
+        ? error.message 
+        : 'Lo siento, ha ocurrido un error al procesar tu mensaje. Por favor, intenta de nuevo más tarde.';
+
+      toast.error(errorMessage, {
+        icon: error instanceof ChatApiError ? '⚠️' : '❌',
+      });
+
       setState(prev => ({
         ...prev,
         sessionId: `session-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
@@ -119,6 +128,16 @@ const AI: React.FC = () => {
     } catch (error) {
       console.error('Error sending message:', error);
       
+      if (error instanceof ChatApiError) {
+        toast.error(error.message, {
+          icon: '⚠️',
+        });
+      } else {
+        toast.error('Lo siento, ha ocurrido un error al procesar tu mensaje. Por favor, intenta de nuevo más tarde.', {
+          icon: '❌',
+        });
+      }
+
       setState(prev => ({
         ...prev,
         messages: [...prev.messages, {
@@ -130,13 +149,21 @@ const AI: React.FC = () => {
           timestamp: Date.now(),
         }],
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error : new Error('Unknown error occurred')
       }));
     }
   }, [inputValue, isLoading, sessionId]);
 
   return (
     <ContentCard subtitle="AI ASSISTANT" title="PREGÚNTAME LO QUE QUIERAS">
+      <Toaster position="top-right" toastOptions={{
+        duration: 5000,
+        style: {
+          background: '#333',
+          color: '#fff',
+          zIndex: 9999
+        },
+      }} />
       <div className="mb-8">
         <p className="mb-4">
           Utiliza este asistente virtual para hacerme cualquier pregunta sobre mi experiencia, proyectos o habilidades.

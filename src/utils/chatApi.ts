@@ -7,6 +7,36 @@ const DEFAULT_HEADERS = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 };
+const MESSAGE_LIMIT = 2;
+const TIMEOUT_MINUTES = 30;
+
+// Session tracking
+const sessionMessages: Record<string, { count: number; lastReset: number }> = {};
+
+// Rate limit check function
+function checkRateLimit(sessionId: string): { allowed: boolean; error?: string } {
+  const now = Date.now();
+  const session = sessionMessages[sessionId] || { count: 0, lastReset: now };
+
+  // Reset count if timeout has passed
+  if (now - session.lastReset > TIMEOUT_MINUTES * 60 * 1000) {
+    session.count = 0;
+    session.lastReset = now;
+  }
+
+  if (session.count >= MESSAGE_LIMIT) {
+    const remainingTime = Math.ceil((TIMEOUT_MINUTES * 60 * 1000 - (now - session.lastReset)) / 60000);
+    return {
+      allowed: false,
+      error: `Has alcanzado el límite de mensajes. Por favor, espera ${remainingTime} minutos antes de enviar más mensajes.`
+    };
+  }
+
+  // Update session data
+  session.count++;
+  sessionMessages[sessionId] = session;
+  return { allowed: true };
+}
 
 // Enums
 export enum MessageRole {
@@ -203,6 +233,12 @@ export async function sendMessage(
   sessionId: string,
   options: ChatOptions,
 ) {
+  // Check rate limit before proceeding
+  const rateLimitCheck = checkRateLimit(sessionId);
+  if (!rateLimitCheck.allowed) {
+    throw new ChatApiError(rateLimitCheck.error || 'Rate limit exceeded');
+  }
+
   if (files.length > 0) {
     return await postWithFiles<SendMessageResponse>(
       `${options.webhookUrl}`,

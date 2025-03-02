@@ -14,7 +14,7 @@ const Footer: React.FC<FooterProps> = ({ text }) => {
     }, [text]);
 
     return (
-        <footer className="fixed bottom-0 right-0 p-4 text-sm text-gray-400">
+        <footer className="md:fixed relative bottom-0 right-0 p-4 text-sm text-gray-400 w-full text-center md:text-right md:w-auto">
             <p>{footerText}</p>
         </footer>
     );
