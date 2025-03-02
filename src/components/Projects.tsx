@@ -37,7 +37,6 @@ const Projects = () => {
         ))}
       </div>
     </ContentCard>
-
   );
 };
 
