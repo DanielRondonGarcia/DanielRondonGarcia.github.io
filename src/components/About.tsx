@@ -1,5 +1,6 @@
-import Image from 'next/image'
 import md5 from 'md5'
+import Image from 'next/image'
+import ContentCard from './ContentCard';
 
 export default function About() {
   const email = process.env.NEXT_PUBLIC_EMAIL || ''
@@ -18,20 +19,19 @@ export default function About() {
     { name: 'Automation', level: 90 },
     { name: 'SQL', level: 70 },
     { name: 'Docker', level: 80 },
-    { name: 'Kubernetes', level: 70 },    
+    { name: 'Kubernetes', level: 70 },
   ]
 
   return (
-    <div className="space-y-12 max-w-4xl mx-auto bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg p-8 rounded-lg">
+    <ContentCard subtitle="ABOUT" title="LEARN MORE ABOUT ME" isTransparent={true}>
       <section>
-        <h2 className="text-3xl font-bold mb-6 text-center">LEARN MORE ABOUT ME</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="flex justify-center">
-            <Image 
-              src={gravatarUrl} 
+          <div className="flex justify-center">
+            <Image
+              src={gravatarUrl}
               alt={process.env.NEXT_PUBLIC_NAME || 'Profile Picture'}
-              width={300} 
-              height={300} 
+              width={300}
+              height={300}
               className="rounded-full object-cover"
             />
           </div>
@@ -62,6 +62,7 @@ export default function About() {
           ))}
         </div>
       </section>
-    </div>
+    </ContentCard>
+
   )
 }
