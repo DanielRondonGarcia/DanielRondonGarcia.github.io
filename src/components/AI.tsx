@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import ContentCard from './ContentCard';
-import { sendMessage, loadPreviousSession, Message, MessageRole, ChatApiError } from '../utils/chatApi';
+import { sendMessage, loadPreviousSession, Message, MessageRole, ChatApiError, getPersistentSessionId } from '../utils/chatApi';
 import { Toaster, toast } from 'react-hot-toast';
 
 interface ChatState {
@@ -61,17 +61,12 @@ const AI: React.FC = () => {
   // Initialize chat
   useEffect(() => {
     if (!sessionId) {
-      const errorMessage = error instanceof ChatApiError 
-        ? error.message 
-        : 'Lo siento, ha ocurrido un error al procesar tu mensaje. Por favor, intenta de nuevo más tarde.';
-
-      toast.error(errorMessage, {
-        icon: error instanceof ChatApiError ? '⚠️' : '❌',
-      });
-
+      // Get persistent session ID or create a new one
+      const persistentSessionId = getPersistentSessionId();
+      
       setState(prev => ({
         ...prev,
-        sessionId: `session-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+        sessionId: persistentSessionId,
         messages: initialMessages.current
       }));
     }

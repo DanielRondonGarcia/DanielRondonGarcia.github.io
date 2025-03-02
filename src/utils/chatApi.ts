@@ -11,7 +11,40 @@ const MESSAGE_LIMIT = 2;
 const TIMEOUT_MINUTES = 30;
 
 // Session tracking
-const sessionMessages: Record<string, { count: number; lastReset: number }> = {};
+const SESSION_STORAGE_KEY = 'chatSessionRateLimits';
+const PERSISTENT_SESSION_ID_KEY = 'persistentChatSessionId';
+
+// Load session data from localStorage
+function loadSessionData(): Record<string, { count: number; lastReset: number }> {
+  try {
+    const storedData = localStorage.getItem(SESSION_STORAGE_KEY);
+    return storedData ? JSON.parse(storedData) : {};
+  } catch (e) {
+    console.error('Failed to load session data from storage:', e);
+    return {};
+  }
+}
+
+// Save session data to localStorage
+function saveSessionData(data: Record<string, { count: number; lastReset: number }>) {
+  try {
+    localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(data));
+  } catch (e) {
+    console.error('Failed to save session data to storage:', e);
+  }
+}
+
+// Get or create persistent session ID
+export function getPersistentSessionId(): string {
+  let sessionId = localStorage.getItem(PERSISTENT_SESSION_ID_KEY);
+  if (!sessionId) {
+    sessionId = `session-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    localStorage.setItem(PERSISTENT_SESSION_ID_KEY, sessionId);
+  }
+  return sessionId;
+}
+
+const sessionMessages: Record<string, { count: number; lastReset: number }> = loadSessionData();
 
 // Rate limit check function
 function checkRateLimit(sessionId: string): { allowed: boolean; error?: string } {
@@ -35,6 +68,7 @@ function checkRateLimit(sessionId: string): { allowed: boolean; error?: string }
   // Update session data
   session.count++;
   sessionMessages[sessionId] = session;
+  saveSessionData(sessionMessages); // Save updated data to sessionStorage
   return { allowed: true };
 }
 
