@@ -14,18 +14,7 @@ const Articles: React.FC = () => {
   const filters = ['ALL', 'DESIGN PATTERNS', 'C#', 'WPF', 'BLAZOR', 'JAVASCRIPT', 'BLOCKCHAIN', 'SOFTWARE ENGINEERING'];
 
   const articles: Article[] = [
-    { title: 'Adapter Design Pattern', category: 'DESIGN PATTERNS', image: '/adapter-pattern.jpg', link: '#' },
-    { title: 'Builder Design Pattern', category: 'DESIGN PATTERNS', image: '/builder-pattern.jpg', link: '#' },
-    { title: 'Composite Design Pattern', category: 'DESIGN PATTERNS', image: '/composite-pattern.jpg', link: '#' },
-    { title: 'Decorator Design Pattern', category: 'DESIGN PATTERNS', image: '/decorator-pattern.jpg', link: '#' },
-    { title: 'Facade Design Pattern', category: 'DESIGN PATTERNS', image: '/facade-pattern.jpg', link: '#' },
-    { title: 'Singleton Design Pattern', category: 'DESIGN PATTERNS', image: '/singleton-pattern.jpg', link: '#' },
-    { title: 'C# Fundamentals', category: 'C#', image: '/csharp-fundamentals.jpg', link: '#' },
-    { title: 'WPF MVVM Pattern', category: 'WPF', image: '/wpf-mvvm.jpg', link: '#' },
-    { title: 'Blazor WebAssembly', category: 'BLAZOR', image: '/blazor-webassembly.jpg', link: '#' },
-    { title: 'JavaScript Promises', category: 'JAVASCRIPT', image: '/js-promises.jpg', link: '#' },
-    { title: 'Blockchain Basics', category: 'BLOCKCHAIN', image: '/blockchain-basics.jpg', link: '#' },
-    { title: 'Clean Code Principles', category: 'SOFTWARE ENGINEERING', image: '/clean-code.jpg', link: '#' },
+    { title: 'Artemis', category: 'MONITORING', image: '/images/artemis.webp', link: 'https://docs.actsis.com/blog/nuevos-paneles' },
   ];
 
   const filteredArticles = useMemo(() => {
@@ -61,7 +50,7 @@ const Articles: React.FC = () => {
                   href={article.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--primary-color-500)] text-black px-4 py-2 rounded-full font-semibold hover:text-[var(--primary-color-600)] transition-colors duration-300"
+                  className="text-[var(--primary-color-500)] text-white px-4 py-2 rounded-full font-semibold hover:text-[var(--primary-color-600)] transition-colors duration-300"
                 >
                   Read More
                 </a>

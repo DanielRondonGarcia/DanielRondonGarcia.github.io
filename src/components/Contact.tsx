@@ -66,7 +66,7 @@ const Contact: React.FC = () => {
               <i className="fas fa-share-alt text-[var(--primary-color-500)] mr-2"></i>
               Connect with me
             </h3>
-            <SocialIcons />
+            <SocialIcons withBackground={false} />
           </div>
         </div>
         <div>

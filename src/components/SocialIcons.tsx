@@ -1,6 +1,10 @@
 import IconLink from './IconLink'
 
-export default function SocialIcons() {
+interface SocialIconsProps {
+  withBackground?: boolean;
+}
+
+export default function SocialIcons({ withBackground = true }: SocialIconsProps) {
   const icons = [
     { 
       href: process.env.NEXT_PUBLIC_LINKEDIN || 'https://www.linkedin.com/in/danielrondongarcia', 
@@ -17,13 +21,13 @@ export default function SocialIcons() {
   ]
 
   return (
-    <div className="flex space-x-4 mt-8">
+    <div className="flex space-x-4 ">
       {icons.map((icon, index) => (
         <IconLink 
           key={index} 
           href={icon.href} 
           icon={icon.icon} 
-          className="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition-colors"
+          className={`${withBackground ? 'bg-gray-700 p-2 rounded-full hover:bg-gray-600' : ''} transition-colors`}
           iconClassName="w-6 h-6 fill-current"
         />
       ))}
