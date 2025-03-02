@@ -15,9 +15,34 @@ const SESSION_STORAGE_KEY = 'chatSessionRateLimits';
 const PERSISTENT_SESSION_ID_KEY = 'persistentChatSessionId';
 
 // Load session data from localStorage
+// Safe localStorage wrapper
+const safeStorage = {
+  getItem(key: string): string | null {
+    if (typeof window !== 'undefined') {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        console.error('Failed to read from localStorage:', e);
+        return null;
+      }
+    }
+    return null;
+  },
+  setItem(key: string, value: string): void {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(key, value);
+      } catch (e) {
+        console.error('Failed to write to localStorage:', e);
+      }
+    }
+  }
+};
+
+// Update the loadSessionData function
 function loadSessionData(): Record<string, { count: number; lastReset: number }> {
   try {
-    const storedData = localStorage.getItem(SESSION_STORAGE_KEY);
+    const storedData = safeStorage.getItem(SESSION_STORAGE_KEY);
     return storedData ? JSON.parse(storedData) : {};
   } catch (e) {
     console.error('Failed to load session data from storage:', e);
@@ -25,21 +50,21 @@ function loadSessionData(): Record<string, { count: number; lastReset: number }>
   }
 }
 
-// Save session data to localStorage
+// Update the saveSessionData function
 function saveSessionData(data: Record<string, { count: number; lastReset: number }>) {
   try {
-    localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(data));
+    safeStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(data));
   } catch (e) {
     console.error('Failed to save session data to storage:', e);
   }
 }
 
-// Get or create persistent session ID
+// Update the getPersistentSessionId function
 export function getPersistentSessionId(): string {
-  let sessionId = localStorage.getItem(PERSISTENT_SESSION_ID_KEY);
+  let sessionId = safeStorage.getItem(PERSISTENT_SESSION_ID_KEY);
   if (!sessionId) {
     sessionId = `session-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-    localStorage.setItem(PERSISTENT_SESSION_ID_KEY, sessionId);
+    safeStorage.setItem(PERSISTENT_SESSION_ID_KEY, sessionId);
   }
   return sessionId;
 }
