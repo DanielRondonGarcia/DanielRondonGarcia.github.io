@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import IconLink from './IconLink'
 
 export default function SocialIcons() {
   const icons = [
@@ -19,11 +19,13 @@ export default function SocialIcons() {
   return (
     <div className="flex space-x-4 mt-8">
       {icons.map((icon, index) => (
-        <Link key={index} href={icon.href} target='_blank' className="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition-colors">
-          <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-            <path d={icon.icon} />
-          </svg>
-        </Link>
+        <IconLink 
+          key={index} 
+          href={icon.href} 
+          icon={icon.icon} 
+          className="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition-colors"
+          iconClassName="w-6 h-6 fill-current"
+        />
       ))}
     </div>
   )
