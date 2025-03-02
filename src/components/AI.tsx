@@ -41,13 +41,13 @@ const AI: React.FC = () => {
   const initialMessages = useRef<Message[]>([
     {
       id: 'welcome-1',
-      content: '¡Hola! 👋',
+      content: 'Hi! 👋',
       role: MessageRole.Assistant,
       timestamp: Date.now(),
     },
     {
       id: 'welcome-2',
-      content: 'Soy el asistente virtual de Daniel. ¿En qué puedo ayudarte hoy?',
+      content: 'I am Daniel, what do you want to talk about?',
       role: MessageRole.Assistant,
       timestamp: Date.now() + 100,
     },
@@ -150,21 +150,21 @@ const AI: React.FC = () => {
   }, [inputValue, isLoading, sessionId]);
 
   return (
-    <ContentCard subtitle="AI ASSISTANT" title="PREGÚNTAME LO QUE QUIERAS">
+    <ContentCard subtitle="AI ASSISTANT" title="ASK ME ANYTHING">
       <Toaster position="top-right" toastOptions={{
         duration: 5000,
         style: {
           background: '#333',
           color: '#fff',
-          zIndex: 9999
+          zIndex: 99999
         },
       }} />
       <div className="mb-8">
         <p className="mb-4">
-          Utiliza este asistente virtual para hacerme cualquier pregunta sobre mi experiencia, proyectos o habilidades.
+          Use this virtual assistant to ask me any questions about my experience, projects, or skills.
         </p>
         <p className="mb-4">
-          El asistente está conectado a una base de conocimiento sobre mi perfil profesional y puede responder consultas relacionadas con mi trabajo.
+          The assistant is connected to a knowledge base about my professional profile and can answer queries related to my work.
         </p>
         <div 
           id="n8n-chat-container" 

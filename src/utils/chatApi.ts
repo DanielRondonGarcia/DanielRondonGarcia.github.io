@@ -1,14 +1,8 @@
 // Chat API utility functions for communicating with n8n webhook
 
 // Constants
-const DEFAULT_CHAT_SESSION_KEY = 'sessionId';
-const DEFAULT_CHAT_INPUT_KEY = 'chatInput';
-const DEFAULT_HEADERS = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-};
-const MESSAGE_LIMIT = process.env.NEXT_MESSAGE_LIMIT || 50;
-const TIMEOUT_MINUTES = process.env.NEXT_TIMEOUT_MINUTES || 30;
+const MESSAGE_LIMIT = process.env.NEXT_PUBLIC_MESSAGE_LIMIT || '10';
+const TIMEOUT_MINUTES = process.env.NEXT_PUBLIC_TIMEOUT_MINUTES || '30';
 
 // Session tracking
 const SESSION_STORAGE_KEY = 'chatSessionRateLimits';
@@ -83,6 +77,8 @@ function checkRateLimit(sessionId: string): { allowed: boolean; error?: string }
   }
 
   if (session.count >= Number(MESSAGE_LIMIT)) {
+    console.log('MESSAGE_LIMIT:', MESSAGE_LIMIT);
+    console.log('TIMEOUT_MINUTES:', TIMEOUT_MINUTES);
     const remainingTime = Math.ceil((Number(TIMEOUT_MINUTES) * 60 * 1000 - (now - session.lastReset)) / 60000);
     return {
       allowed: false,
