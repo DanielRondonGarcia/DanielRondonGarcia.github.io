@@ -7,8 +7,8 @@ const DEFAULT_HEADERS = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 };
-const MESSAGE_LIMIT = 2;
-const TIMEOUT_MINUTES = 30;
+const MESSAGE_LIMIT = process.env.NEXT_MESSAGE_LIMIT || 50;
+const TIMEOUT_MINUTES = process.env.NEXT_TIMEOUT_MINUTES || 30;
 
 // Session tracking
 const SESSION_STORAGE_KEY = 'chatSessionRateLimits';
@@ -52,13 +52,13 @@ function checkRateLimit(sessionId: string): { allowed: boolean; error?: string }
   const session = sessionMessages[sessionId] || { count: 0, lastReset: now };
 
   // Reset count if timeout has passed
-  if (now - session.lastReset > TIMEOUT_MINUTES * 60 * 1000) {
+  if (now - session.lastReset > Number(TIMEOUT_MINUTES) * 60 * 1000) {
     session.count = 0;
     session.lastReset = now;
   }
 
-  if (session.count >= MESSAGE_LIMIT) {
-    const remainingTime = Math.ceil((TIMEOUT_MINUTES * 60 * 1000 - (now - session.lastReset)) / 60000);
+  if (session.count >= Number(MESSAGE_LIMIT)) {
+    const remainingTime = Math.ceil((Number(TIMEOUT_MINUTES) * 60 * 1000 - (now - session.lastReset)) / 60000);
     return {
       allowed: false,
       error: `Has alcanzado el límite de mensajes. Por favor, espera ${remainingTime} minutos antes de enviar más mensajes.`
