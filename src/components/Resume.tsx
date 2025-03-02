@@ -1,17 +1,16 @@
 import React from 'react';
+import Image from 'next/image'
+import ContentCard from './ContentCard';
 
 const Resume = () => {
   return (
-    <div className="bg-black text-white min-h-screen p-8">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4">RESUME</h2>
-        <h1 className="text-5xl font-bold mb-8">MY JOURNEY</h1>
+    <ContentCard subtitle="RESUME" title="MY JOURNEY">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h3 className="text-2xl font-bold mb-4">Summary</h3>
             <div className="mb-8">
-              <h4 className="text-xl font-bold text-green-400 mb-2">Daniel Rondón García</h4>
+              <h4 className="text-xl font-bold text-green-400 mb-2">{process.env.NEXT_PUBLIC_NAME}</h4>
               <p className="mb-4">Innovative and deadline-driven Software Engineer with 5+ years of experience designing and developing applications for desktop, web and mobile platforms.</p>
               <ul className="list-disc list-inside">
                 <li>Mumbai, India</li>
@@ -64,8 +63,7 @@ const Resume = () => {
 
         <h3 className="text-2xl font-bold mt-8 mb-4">Publications & Certifications</h3>
         {/* Add your publications and certifications here */}
-      </div>
-    </div>
+    </ContentCard>
   );
 };
 

@@ -13,7 +13,7 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
     { href: 'resume', label: 'Resume' },
     { href: 'projects', label: 'Projects' },
     { href: 'articles', label: 'Articles' },
-    { href: 'dsa-simplified', label: 'DSA Simplified' },
+    { href: 'AI', label: 'AI' },
     { href: 'contact', label: 'Contact' },
 
   ]
@@ -44,7 +44,7 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
         ${activeSection !== 'home' || isScrolled ? 'bg-black' : 'bg-transparent'}
       `}
     >
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container max-w-4xl mx-auto py-4">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold">
             {activeSection !== 'home' && (

@@ -7,6 +7,8 @@ import Resume from '@/components/Resume'
 import Projects from '@/components/Projects'
 import Articles from '@/components/Articles'
 import Contact from '@/components/Contact'
+import Footer from '@/components/Footer'
+import AI from '@/components/AI'
 import { useState, useEffect } from 'react'
 
 export default function Home() {
@@ -25,8 +27,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 to-black text-white relative overflow-hidden">
       <Head>
-        <title>Daniel Rondón García - Portfolio</title>
-        <meta name="description" content="Daniel Rondón García's portfolio" />
+        <title>{process.env.NEXT_PUBLIC_NAME} - Portfolio</title>
+        <meta name="description" content={`${process.env.NEXT_PUBLIC_NAME}'s portfolio`} />
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
       </Head>
@@ -60,14 +62,15 @@ export default function Home() {
           <div className={`transition-opacity duration-500 ${activeSection === 'articles' ? 'opacity-100' : 'opacity-0 hidden'}`}>
             <Articles />
           </div>
+          <div className={`transition-opacity duration-500 ${activeSection === 'AI' ? 'opacity-100' : 'opacity-0 hidden'}`}>
+            <AI />
+          </div>
           <div className={`transition-opacity duration-500 ${activeSection === 'contact' ? 'opacity-100' : 'opacity-0 hidden'}`}>
             <Contact />
           </div>
         </main>
 
-        <footer className="text-right py-4 text-sm text-gray-400">
-          <p>Designed & Licensed by Daniel Rondón García</p>
-        </footer>
+        <Footer />
       </div>
     </div>
   )
