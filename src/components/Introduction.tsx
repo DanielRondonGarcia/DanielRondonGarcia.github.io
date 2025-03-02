@@ -10,10 +10,10 @@ export default function Introduction() {
         like an award-winning author crafting resilience and efficiency.
       </p>
       <p className="text-lg mb-2">
-        Dive into, <Link href="/blazor-simplified" className="text-green-400 hover:underline">DevSecOps</Link>
+        Dive into, <Link href="/blazor-simplified" className="text-[var(--primary-color)] hover:underline">DevSecOps</Link>
       </p>
       <p className="text-lg mb-8">
-        Explore my, <Link href="/portfolio" className="text-green-400 hover:underline">Portfolio</Link>
+        Explore my, <Link href="/portfolio" className="text-[var(--primary-color)] hover:underline">Portfolio</Link>
       </p>
     </section>
   )

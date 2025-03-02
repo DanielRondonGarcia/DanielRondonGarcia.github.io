@@ -7,14 +7,14 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ icon, title, description }) => (
-  <div className="bg-gray-900 p-6 rounded-lg transition-all duration-300 hover:bg-green-500 group">
+  <div className="bg-gray-900 p-6 rounded-lg transition-all duration-300 hover:text-[var(--primary-color-500)] group">
     <div className="flex justify-center mb-4">
-      <div className="bg-green-500 p-4 rounded-lg group-hover:bg-white">
-        <i className={`fas ${icon} text-3xl text-white group-hover:text-green-500`}></i>
+      <div className="bg-gray-800 text-[var(--primary-color-500)] p-4 rounded-lg transition-all duration-300 group-hover:bg-white">
+        <i className={`fas ${icon} text-3xl text-white group-hover:text-[var(--primary-color-500)]`}></i>
       </div>
     </div>
-    <h3 className="text-xl font-bold mb-2 text-center group-hover:text-black">{title}</h3>
-    <p className="text-gray-400 text-center group-hover:text-black">{description}</p>
+    <h3 className="text-xl font-bold mb-2 text-center group-hover:text-[var(--primary-color-500)]">{title}</h3>
+    <p className="text-gray-400 text-center group-hover:text-gray-200">{description}</p>
   </div>
 );
 

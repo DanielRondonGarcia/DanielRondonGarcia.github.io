@@ -36,7 +36,7 @@ const Articles: React.FC = () => {
   return (
     <div className="bg-black text-white min-h-screen p-8">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-2 text-green-500">PORTFOLIO</h2>
+        <h2 className="text-2xl font-bold mb-2 text-[var(--primary-color-500)]">PORTFOLIO</h2>
         <h1 className="text-5xl font-bold mb-12">MY ARTICLES</h1>
 
         <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -46,7 +46,7 @@ const Articles: React.FC = () => {
               onClick={() => setActiveFilter(filter)}
               className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300 ${
                 activeFilter === filter
-                  ? 'bg-green-500 text-black'
+                  ? 'text-[var(--primary-color-500)] text-black'
                   : 'bg-gray-800 text-white hover:bg-gray-700'
               }`}
             >
@@ -65,14 +65,14 @@ const Articles: React.FC = () => {
                     href={article.link} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="bg-green-500 text-black px-4 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300"
+                    className="text-[var(--primary-color-500)] text-black px-4 py-2 rounded-full font-semibold hover:text-[var(--primary-color-600)] transition-colors duration-300"
                   >
                     Read More
                   </a>
                 </div>
               </div>
               <div className="p-4">
-                <span className="text-green-500 text-sm font-semibold">{article.category}</span>
+                <span className="text-[var(--primary-color-500)] text-sm font-semibold">{article.category}</span>
                 <h3 className="text-xl font-bold mt-2">{article.title}</h3>
               </div>
               {/* Custom shape with two square corners and two rounded corners */}

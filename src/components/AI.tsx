@@ -180,7 +180,7 @@ const AI: React.FC = () => {
               >
                 <div 
                   className={`inline-block p-3 rounded-lg ${message.role === 'user' 
-                    ? 'bg-green-600 text-white' 
+                    ? 'text-[var(--primary-color-600)] text-white' 
                     : 'bg-gray-800 text-white'}`}
                 >
                   {message.content}
@@ -214,7 +214,7 @@ const AI: React.FC = () => {
               />
               <button 
                 type="submit" 
-                className="bg-green-600 text-white px-4 py-2 rounded-r-lg hover:bg-green-700 transition-colors"
+                className="text-[var(--primary-color-600)] text-white px-4 py-2 rounded-r-lg hover:text-[var(--primary-color-700)] transition-colors"
                 disabled={isLoading}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

@@ -36,7 +36,7 @@ export default function About() {
             />
           </div>
           <div className="space-y-4">
-            <h3 className="text-2xl font-semibold text-green-400 text-center md:text-left">{process.env.NEXT_PUBLIC_OCCUPATION}</h3>
+            <h3 className="text-2xl font-semibold text-[var(--primary-color)] text-center md:text-left">{process.env.NEXT_PUBLIC_OCCUPATION}</h3>
             <div className="grid grid-cols-1 gap-4">
               <p><span className="font-semibold">Degree:</span> {process.env.NEXT_PUBLIC_DEGREE}</p>
               <p><span className="font-semibold">College:</span> {process.env.NEXT_PUBLIC_COLLEGE}</p>
@@ -56,7 +56,7 @@ export default function About() {
                 <span>{skill.level}%</span>
               </div>
               <div className="w-full bg-gray-700 rounded-full h-2.5">
-                <div className="bg-green-400 h-2.5 rounded-full" style={{ width: `${skill.level}%` }}></div>
+                <div className="bg-[var(--primary-color)] h-2.5 rounded-full" style={{ width: `${skill.level}%` }}></div>
               </div>
             </div>
           ))}

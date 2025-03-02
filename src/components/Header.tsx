@@ -24,13 +24,13 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
           <button
             onClick={() => setActiveSection(item.href)}
             className={`
-              hover:text-green-400 transition-colors relative
-              ${activeSection === item.href ? 'text-green-400' : 'text-white'}
+              hover:text-[var(--primary-color)] transition-colors relative
+              ${activeSection === item.href ? 'text-[var(--primary-color)]' : 'text-white'}
               group
             `}
           >
             {item.label}
-            <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-green-400 transition-all duration-300 ${activeSection === item.href ? 'w-full' : 'group-hover:w-full'}`}></span>
+            <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary-color)] transition-all duration-300 ${activeSection === item.href ? 'w-full' : 'group-hover:w-full'}`}></span>
           </button>
         </li>
       ))}

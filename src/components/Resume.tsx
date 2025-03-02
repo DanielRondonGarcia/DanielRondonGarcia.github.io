@@ -7,66 +7,84 @@ const Resume = () => {
   return (
     <ContentCard subtitle="RESUME" title="MY JOURNEY">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <Timeline title="Summary">
-              <TimelineItem title={process.env.NEXT_PUBLIC_NAME || 'RIKAM PALKAR'}>
-                <p className="mb-4">Innovative and deadline-driven Software Engineer with 5+ years of experience designing and developing applications for desktop, web and mobile platforms.</p>
-                <ul className="list-disc list-inside">
-                  <li>Mumbai, India</li>
-                  <li>rikampalkar@gmail.com</li>
-                </ul>
-              </TimelineItem>
-            </Timeline>
+      <div className="grid grid-cols-12 gap-4">
 
-            <Timeline title="Education">
-              <TimelineItem 
-                title="MASTER OF COMPUTER APPLICATION"
-                period="2015 - 2018"
-                location="VJTI, Mumbai"
-              >
-                <p>Java, Python, Data structures & algorithms, Data science, Computer architecture.</p>
-              </TimelineItem>
-              <TimelineItem 
-                title="BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY"
-                period="2010 - 2013"
-                location="Mumbai University"
-              >
-                <p>.NET, IOT, Computer graphics.</p>
-              </TimelineItem>
-            </Timeline>
-          </div>
+        <div className="col-span-12 lg:col-span-6">
 
-          <div>
-            <Timeline title="Professional Experience">
-              <TimelineItem 
-                title="SOFTWARE DEVELOPER II"
-                period="April, 2021 - Present"
-                location="Weatherford"
-              >
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Working with international team.</li>
-                  <li>Lead in the design, development, and implementation of the WPF & Blazor applications.</li>
-                  <li>Designing architecture for thin web client, & developing blazor components.</li>
-                  <li>Delegate and supervise tasks of the 3 members of the development team and provide counsel on all aspects of the project.</li>
-                  <li>Helped company to minimize project's budget cost by developing successful POCs and developing web app from the scratch.</li>
-                  <li>Nominated for 2022's star performer award by CEO.</li>
-                </ul>
-              </TimelineItem>
-              <TimelineItem 
-                title="SOFTWARE DEVELOPER"
-                period="Oct, 2019 - Apr, 2021"
-                location="Datamatics"
-              >
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Worked on Mumbai Metro and Lucknow Metro.</li>
-                  <li>Designing user interface in WPF for Ticket Vending Machine & Ticket Office Machine.</li>
-                  <li>Programming card readers, Token Dispensing Machine & Automatic Fare Collection.</li>
-                </ul>
-              </TimelineItem>
-            </Timeline>
-          </div>
+          <Timeline title="Summary">
+            <TimelineItem title={process.env.NEXT_PUBLIC_NAME || 'RIKAM PALKAR'}>
+              <p className="mb-4">DevOps and SRE with +3 years in CI/CD, automation, and vulnerability detection. Studying a master's in Cybersecurity. Collaborate in agile teams, passionate about efficiency, with QA experience and focus on continuous improvement.</p>
+              <ul className="list-disc list-inside">
+                <li>Bucaramanga, CO</li>
+                <li>{process.env.NEXT_PUBLIC_EMAIL}</li>
+              </ul>
+            </TimelineItem>
+          </Timeline>
+
+          <Timeline title="Education">
+            <TimelineItem
+              title="MAESTRÍA OFICIAL EN CIBERSEGURIDAD"
+              period="2024 - Present"
+              location="Universidad Internacional de Valencia, España">
+              <p>Auditing of information systems, Governance and management of information technologies, Development and implementation of systems, Protection of information assets.</p>
+            </TimelineItem>
+            <TimelineItem
+              title="INGENIERÍA DE SISTEMAS"
+              period="2017 - 2023"
+              location="Universidad de Investigación y Desarrollo - UDI, Bucaramanga (Colombia)"
+            >
+              <p>Nivel 6 EQF-MEC</p>
+            </TimelineItem>
+          </Timeline>
+
         </div>
+
+        <div className="col-span-12 lg:col-span-6">
+
+          <Timeline title="Certifications">
+            <TimelineItem
+              title="CRASH COURSE ON PYTHON"
+              period="2023"
+              location="Coursera. Online"
+            >
+              <p>Certificado: <a href="https://www.coursera.org/account/accomplishments/certificate/H6MPJMV8K5TH" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">H6MPJMV8K5TH</a></p>
+            </TimelineItem>
+            <TimelineItem
+              title="USING PYTHON TO INTERACT WITH OPERATING SYSTEM"
+              period="2023"
+              location="Coursera. Online"
+            >
+              <p>Certificado: <a href="https://www.coursera.org/account/accomplishments/certificate/I3WI7EG8HYCH" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">I3WI7EG8HYCH</a></p>
+            </TimelineItem>
+          </Timeline>
+
+          <Timeline title="Professional Experience">
+            <TimelineItem
+              title="DEVOPS ENGINEER & QA LEAD / CYBERSECURITY"
+              period="17/02/2022 - Present"
+              location="ACTSIS LTDA, Bucaramanga, Colombia">
+              <ul className="list-disc list-inside space-y-2">
+                <li>Began as a Junior Developer for 6 months, specializing in PL/SQL Oracle for commercial systems.</li>
+                <li>Advanced to DevOps Engineer and QA Lead role.</li>
+                <li>Expanded responsibilities to include cybersecurity expertise.</li>
+                <li>Conducted requirement analysis and ensured robust system performance.</li>
+              </ul>
+            </TimelineItem>
+            <TimelineItem
+              title="FULL-STACK ENGINEER"
+              period="01/08/2019 - 01/02/2020"
+              location="Conexión Educativa S.A.S, Bucaramanga, Colombia"
+            >
+              <ul className="list-disc list-inside space-y-2">
+                <li>Developed CMS-based websites tailored for schools and the educational sector.</li>
+                <li>Collaborated with a web development team to design, create, and deploy client-requested projects.</li>
+                <li>Utilized CSS, HTML, JavaScript, PHP, and Java to build and enhance system functionalities.</li>
+              </ul>
+            </TimelineItem>
+          </Timeline>
+        </div>
+
+      </div>
     </ContentCard>
   );
 };
