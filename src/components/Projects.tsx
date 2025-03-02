@@ -1,4 +1,6 @@
 import React from 'react';
+import ContentCard from './ContentCard';
+
 
 interface ProjectCardProps {
   icon: string;
@@ -24,47 +26,18 @@ const Projects = () => {
       icon: "fa-chart-line",
       title: "Stock Marker Charts",
       description: "A web based application allowing users to use Candlestick, OHLC (Open-High-Low-Close) charts on stocks from NASDAQ."
-    },
-    {
-      icon: "fa-virus",
-      title: "Covid 19 Tracker",
-      description: "Dashboard to show total number of confirmed cases, total number of patients recovered from covid and number of people who lost their lives to covid. This can be filtered by country and can also be filtered by data. It shows high level charts such as donut and line charts for better visualization of data."
-    },
-    {
-      icon: "fa-window-maximize",
-      title: "Blazing Blazor",
-      description: "Blazor is a feature of ASP.NET, the popular web development framework that extends the .NET developer platform with tools and libraries for building web apps."
-    },
-    {
-      icon: "fa-train",
-      title: "Mumbai\\Lucknow Metro",
-      description: "The Mumbai Metro is a rapid transit system serving the city of Mumbai and the wider Mumbai Metropolitan Region in Maharashtra, India."
-    },
-    {
-      icon: "fa-desktop",
-      title: "CygNet - Canvas",
-      description: "Canvas is HMI: Human-Machine Interface application, canvas provides high quality screen design functionality utilizing a wide range of specialized tools & controls."
-    },
-    {
-      icon: "fa-globe",
-      title: "Thin Web Client",
-      description: "TWC is a web assembly allowing customers to view HMI-based screens and workflows in a web browser."
     }
   ];
 
   return (
-    <div className="bg-black text-white min-h-screen p-8">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4">PROJECTS</h2>
-        <h1 className="text-5xl font-bold mb-12">MY PROJECTS</h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
-          ))}
-        </div>
+    <ContentCard subtitle="PROJECTS" title="MY PROJECTS">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project, index) => (
+          <ProjectCard key={index} {...project} />
+        ))}
       </div>
-    </div>
+    </ContentCard>
+
   );
 };
 

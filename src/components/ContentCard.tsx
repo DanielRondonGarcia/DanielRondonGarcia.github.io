@@ -23,7 +23,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
                 {subtitle && (
                     <div className="flex items-center relative mb-2">
                         <h2 className="text-sm uppercase tracking-wider text-gray-400">{subtitle}</h2>
-                        <div className="w-[120px] h-[1px] mx-[10px] my-1 text-[var(--primary-color)"></div>
+                        <div className="w-[120px] h-[1px] mx-[10px] my-1 bg-[var(--primary-color)]"></div>
                     </div>
                 )}
                 {title && <h1 className="text-5xl font-bold">{title}</h1>}
