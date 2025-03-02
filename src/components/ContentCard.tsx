@@ -18,7 +18,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
     className = '',
 }) => {
     return (
-        <div className={`rounded-lg bg-black text-white min-h-screen p-8 max-w-${maxWidth} mx-auto ${isTransparent ? 'bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-lg' : ''} p-8 ${className}`}>
+        <div className={`rounded-lg bg-black text-white p-8 max-w-${maxWidth} mx-auto ${isTransparent ? 'bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-lg' : ''} p-8 ${className}`}>
             <div className="relative mb-4">
                 {subtitle && (
                     <div className="flex items-center relative mb-2">

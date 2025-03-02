@@ -11,7 +11,7 @@ interface Article {
 const Articles: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('ALL');
 
-  const filters = ['ALL', 'DESIGN PATTERNS', 'C#', 'WPF', 'BLAZOR', 'JAVASCRIPT', 'BLOCKCHAIN', 'SOFTWARE ENGINEERING'];
+  const filters = ['ALL', 'MONITORING'];
 
   const articles: Article[] = [
     { title: 'Artemis', category: 'MONITORING', image: '/images/artemis.webp', link: 'https://docs.actsis.com/blog/nuevos-paneles' },
