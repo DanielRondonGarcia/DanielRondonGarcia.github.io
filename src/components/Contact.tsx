@@ -2,6 +2,7 @@ import emailjs from '@emailjs/browser';
 import ContentCard from './ContentCard';
 import SocialIcons from '@/components/SocialIcons'
 import React, { useState, FormEvent } from 'react';
+import ContactInfoItem from './ContactInfoItem';
 
 const Contact: React.FC = () => {
   const [name, setName] = useState('');
@@ -43,31 +44,18 @@ const Contact: React.FC = () => {
   };
 
   return (
-
     <ContentCard subtitle="CONTACT" title="CONTACT ME">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <div>
-          <div className="mb-8">
-            <h3 className="text-xl font-bold mb-2 flex items-center">
-              <i className="fas fa-map-marker-alt text-[var(--primary-color-500)] mr-2"></i>
-              My Address
-            </h3>
+          <ContactInfoItem icon="fa-map-marker-alt" title="My Address">
             <p>{process.env.NEXT_PUBLIC_LOCATION}</p>
-          </div>
-          <div className="mb-8">
-            <h3 className="text-xl font-bold mb-2 flex items-center">
-              <i className="fas fa-envelope text-[var(--primary-color-500)] mr-2"></i>
-              Email Me
-            </h3>
+          </ContactInfoItem>
+          <ContactInfoItem icon="fa-envelope" title="Email Me">
             <p>{process.env.NEXT_PUBLIC_EMAIL}</p>
-          </div>
-          <div className="mb-8">
-            <h3 className="text-xl font-bold mb-2 flex items-center">
-              <i className="fas fa-share-alt text-[var(--primary-color-500)] mr-2"></i>
-              Connect with me
-            </h3>
+          </ContactInfoItem>
+          <ContactInfoItem icon="fa-share-alt" title="Connect with me">
             <SocialIcons withBackground={false} />
-          </div>
+          </ContactInfoItem>
         </div>
         <div>
           <form onSubmit={handleSubmit}>
@@ -124,7 +112,6 @@ const Contact: React.FC = () => {
         </div>
       </div>
     </ContentCard>
-
   );
 };
 
