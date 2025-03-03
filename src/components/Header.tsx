@@ -59,7 +59,7 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
         ${activeSection !== 'home' && !isScrolled 
           ? 'bg-black' 
           : isScrolled 
-            ? 'bg-black/70 backdrop-blur-md' 
+            ? 'bg-black' 
             : 'bg-transparent'}
       `}
     >
@@ -92,9 +92,9 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
         <div
           id="mobile-menu"
           className={`
-            fixed top-0 left-0 h-full w-64 bg-black/95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out
+            fixed top-0 left-0 h-full w-64 bg-black/95 shadow-lg transform transition-transform duration-300 ease-in-out
             ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
-            md:hidden z-50 pt-16 px-4
+            md:hidden z-[100] pt-16 px-4
           `}
         >
           <ul className="flex flex-col space-y-4">
