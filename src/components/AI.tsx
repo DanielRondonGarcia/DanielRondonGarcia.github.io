@@ -169,7 +169,7 @@ const AI: React.FC = () => {
         <div 
           id="n8n-chat-container" 
           ref={chatContainerRef}
-          className="w-full h-[500px] bg-gray-900 rounded-lg overflow-hidden flex flex-col"
+          className="w-full h-[70vh] min-h-[300px] bg-gray-900 rounded-lg overflow-hidden flex flex-col"
         >
           {/* Messages container */}
           <div className="flex-1 overflow-y-auto p-4">
@@ -179,7 +179,7 @@ const AI: React.FC = () => {
                 className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}
               >
                 <div 
-                  className={`inline-block p-3 rounded-lg ${message.role === 'user' 
+                  className={`inline-block p-2 md:p-3 rounded-lg text-sm md:text-base ${message.role === 'user' 
                     ? 'bg-[var(--primary-color-600)] text-white' 
                     : 'bg-gray-800 text-white'}`}
                 >
