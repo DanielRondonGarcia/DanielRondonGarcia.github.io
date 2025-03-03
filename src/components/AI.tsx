@@ -7,7 +7,7 @@ interface ChatState {
   messages: Message[];
   isLoading: boolean;
   sessionId: string;
-  error: Error | null;  // Change error type to Error | null
+  error: Error | null;
 }
 
 const INITIAL_STATE: ChatState = {
@@ -151,7 +151,7 @@ const AI: React.FC = () => {
 
   return (
     <ContentCard subtitle="AI ASSISTANT" title="ASK ME ANYTHING">
-      <Toaster position="top-right" toastOptions={{
+      <Toaster position="bottom-right" toastOptions={{
         duration: 5000,
         style: {
           background: '#333',
@@ -209,15 +209,15 @@ const AI: React.FC = () => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Escribe tu pregunta..."
-                className="flex-1 p-2 bg-gray-700 text-white rounded-l-lg focus:outline-none"
+                className="flex-1 p-1.5 md:p-2 bg-gray-700 text-white rounded-l-lg focus:outline-none text-sm md:text-base"
                 disabled={isLoading}
               />
               <button 
                 type="submit" 
-                className="bg-[var(--primary-color-600)] text-white px-4 py-2 rounded-r-lg hover:bg-[var(--primary-color-700)] transition-colors"
+                className="bg-[var(--primary-color-600)] text-white px-2 py-1.5 md:px-4 md:py-2 rounded-r-lg hover:bg-[var(--primary-color-700)] transition-colors text-sm md:text-base"
                 disabled={isLoading}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </button>
