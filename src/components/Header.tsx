@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ThemeToggle from './ThemeToggle';
 
 interface HeaderProps {
   activeSection: string;
@@ -26,7 +27,7 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
             onClick={() => setActiveSection(item.href)}
             className={`
               hover:text-[var(--primary-color)] transition-colors relative
-              ${activeSection === item.href ? 'text-[var(--primary-color)]' : 'text-white'}
+              ${activeSection === item.href ? 'text-[var(--primary-color)]' : activeSection === 'home' && !isScrolled ? 'text-[var(--text-primary)]' : 'text-white'}
               group
             `}
           >
@@ -57,9 +58,9 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
       className={`
         fixed left-0 right-0 top-0 z-50 transition-all duration-500 ease-in-out
         ${activeSection !== 'home' && !isScrolled 
-          ? 'bg-black' 
+          ? 'bg-black dark:bg-black' 
           : isScrolled 
-            ? 'bg-black' 
+            ? 'bg-black dark:bg-black' 
             : 'bg-transparent'}
       `}
     >
@@ -67,24 +68,28 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold">
             {activeSection !== 'home' && (
-              <button onClick={() => setActiveSection('home')}>{process.env.NEXT_PUBLIC_NAME}</button>
+              <button onClick={() => setActiveSection('home')} className="text-white hover:text-[var(--primary-color)] transition-colors">{process.env.NEXT_PUBLIC_NAME}</button>
             )}
           </div>
           
-          {/* Mobile Menu Button */}
-          <button
-            id="menu-button"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white p-2 rounded-lg hover:bg-gray-700 transition-colors"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex md:items-center md:space-x-4">
             {renderNavItems()}
+            <ThemeToggle />
+          </div>
+          
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
+            <button
+              id="menu-button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-800 dark:text-white p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
         </div>
 
@@ -92,7 +97,7 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
         <div
           id="mobile-menu"
           className={`
-            fixed top-0 left-0 h-full w-64 bg-black/95 shadow-lg transform transition-transform duration-300 ease-in-out
+            fixed top-0 left-0 h-full w-64 bg-black/95 dark:bg-black/95 shadow-lg transform transition-transform duration-300 ease-in-out
             ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
             md:hidden z-[100] pt-16 px-4
           `}
@@ -118,5 +123,5 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
         </div>
       </nav>
     </header>
-  )
+  );
 }

@@ -5,6 +5,7 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -19,6 +20,12 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
+      },
+      backgroundImage: {
+        'dot-pattern': 'radial-gradient(currentColor 1px, transparent 1px)',
+      },
+      backgroundSize: {
+        'dot-sm': '20px 20px',
       },
     },
   },

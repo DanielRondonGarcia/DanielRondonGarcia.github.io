@@ -25,7 +25,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900 to-black text-white relative overflow-hidden">
+    <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-black text-gray-900 dark:text-white relative overflow-hidden">
       <Head>
         <title>{process.env.NEXT_PUBLIC_NAME} - Portfolio</title>
         <meta name="description" content={`${process.env.NEXT_PUBLIC_NAME}'s portfolio`} />
@@ -33,7 +33,7 @@ export default function Home() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
       </Head>
 
-      <div className="absolute inset-0 bg-[url('/curved-lines.svg')] bg-no-repeat bg-cover opacity-20"></div>
+      <div className="absolute inset-0 bg-[url('/curved-lines.svg')] bg-no-repeat bg-cover text-black dark:text-white opacity-20"></div>
 
       <Header activeSection={activeSection} setActiveSection={setActiveSection} isScrolled={isScrolled} />
 

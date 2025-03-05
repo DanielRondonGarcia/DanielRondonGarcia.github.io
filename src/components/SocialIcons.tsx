@@ -27,7 +27,7 @@ export default function SocialIcons({ withBackground = true }: SocialIconsProps)
           key={index} 
           href={icon.href} 
           icon={icon.icon} 
-          className={`${withBackground ? 'bg-gray-700 p-2 rounded-full hover:bg-gray-600' : ''} transition-colors`}
+          className={`${withBackground ? 'dark:bg-gray-700 bg-white p-2 rounded-full dark:hover:bg-gray-600 hover:bg-gray-200' : ''} transition-colors`}
           iconClassName="w-6 h-6 fill-current"
         />
       ))}

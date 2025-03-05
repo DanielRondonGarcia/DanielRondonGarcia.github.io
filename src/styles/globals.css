@@ -4,22 +4,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light mode */
 :root {
-  /* Primary Colors */
   --primary-color: rgb(74 222 128);
   --primary-color-500: rgb(34 197 94);
   --primary-color-600: rgb(22 163 74);
   --primary-color-700: rgb(21 128 61);
+  
+  --text-secondary: #4a5568;
+  --text-accent: rgb(74 222 128);
+  --text-muted: #718096;
+  --bg-primary: #f0f0f0; /* Changed from #f7f7f7 to a softer light color */
+  --dot-color: rgba(0, 0, 0, 0.2); /* Increased visibility of black dots */
+}
 
-  /* Text Colors */
+/* Dark mode */
+:root[class~="dark"] {
   --text-primary: #ffffff;
   --text-secondary: #a3a3a3;
   --text-accent: rgb(74 222 128);
   --text-muted: #6b7280;
-  --text-light: #f3f4f6;
-  --text-dark: #111827;
+  --bg-primary: #111827;
+  --dot-color: rgba(255, 255, 255, 0.2); /* Increased visibility of white dots */
 }
 
 body {
   font-family: 'Poppins', sans-serif;
+  @apply bg-[var(--bg-primary)] text-[var(--text-primary)];
+  background-image: var(--dot-pattern);
+  background-size: var(--dot-sm);
+}
+
+/* Set the dot pattern color */
+body {
+  --dot-pattern: radial-gradient(var(--dot-color) 1px, transparent 1px);
 }
