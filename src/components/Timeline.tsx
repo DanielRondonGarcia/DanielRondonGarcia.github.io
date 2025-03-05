@@ -31,7 +31,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
         {period && (
           <div className="relative mb-2">
             <div className="absolute left-[-1.5rem] top-1/2 w-6 h-0.5 bg-gray-700"></div>
-            <p className="font-bold inline-block bg-black bg-gray-700 backdrop-filter backdrop-blur-sm px-3 py-1 rounded border border-gray-700 text-[var(--primary-color)]">
+            <p className="font-bold inline-block bg-black text-white dark:bg-gray-700 backdrop-filter backdrop-blur-sm px-3 py-1 rounded border border-gray-700 text-[var(--primary-color)]">
               <span className="mr-1">{period}</span>
             </p>
           </div>

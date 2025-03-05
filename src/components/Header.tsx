@@ -26,8 +26,8 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
           <button
             onClick={() => setActiveSection(item.href)}
             className={`
-              hover:text-[var(--primary-color)] transition-colors relative
-              ${activeSection === item.href ? 'text-[var(--primary-color)]' : activeSection === 'home' && !isScrolled ? 'text-[var(--text-primary)]' : 'text-white'}
+              hover:text-[var(--primary-color)] transition-colors relative 
+              ${activeSection === item.href ? 'text-[var(--primary-color)]' : activeSection === 'home' ? 'text-[var(--text-primary)]' : ''}
               group
             `}
           >
@@ -57,18 +57,14 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
     <header
       className={`
         fixed left-0 right-0 top-0 z-50 transition-all duration-500 ease-in-out
-        ${activeSection !== 'home' && !isScrolled 
-          ? 'bg-black dark:bg-black' 
-          : isScrolled 
-            ? 'bg-black dark:bg-black' 
-            : 'bg-transparent'}
+        ${activeSection !== 'home' ? 'backdrop-blur-md backdrop-filter bg-white/10 dark:bg-black/20 shadow-lg' : ''}
       `}
     >
       <nav className="container max-w-4xl mx-auto px-4 md:px-0 py-4">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold">
             {activeSection !== 'home' && (
-              <button onClick={() => setActiveSection('home')} className="text-white hover:text-[var(--primary-color)] transition-colors">{process.env.NEXT_PUBLIC_NAME}</button>
+              <button onClick={() => setActiveSection('home')} className="hover:text-[var(--primary-color)] transition-colors">{process.env.NEXT_PUBLIC_NAME}</button>
             )}
           </div>
           
