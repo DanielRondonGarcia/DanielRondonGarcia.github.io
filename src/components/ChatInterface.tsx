@@ -21,15 +21,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
 }) => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   
   // Scroll to bottom of messages
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
-  // Scroll to bottom when messages change
+  // Scroll to bottom when messages change and focus input
   React.useEffect(() => {
     scrollToBottom();
+    inputRef.current?.focus();
   }, [messages, scrollToBottom]);
 
   return (
@@ -38,10 +40,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       <div 
         id="chat-container" 
         ref={chatContainerRef}
-        className="w-full h-[70vh] min-h-[300px] bg-gray-900 rounded-lg overflow-hidden flex flex-col"
+        className="w-full max-h-[70vh] min-h-[100px] bg-gray-900 rounded-lg overflow-hidden flex flex-col"
       >
         {/* Messages container */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-4 this_scroll">
           {messages.map((message) => (
             <div 
               key={message.id} 
@@ -74,6 +76,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         <form onSubmit={handleSendMessage} className="p-4 bg-gray-800 border-t border-gray-700">
           <div className="flex">
             <input
+              ref={inputRef}
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
