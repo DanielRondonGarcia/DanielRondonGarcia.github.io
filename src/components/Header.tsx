@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import ThemeToggle from './ThemeToggle';
+import MobileMenu from './MobileMenu';
+import MobileMenuButton from './MobileMenuButton';
 
 interface HeaderProps {
   activeSection: string;
@@ -54,70 +56,41 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
   }, []);
 
   return (
-    <header
-      className={`
-        fixed left-0 right-0 top-0 z-50 transition-all duration-500 ease-in-out
-        ${activeSection !== 'home' ? 'backdrop-blur-md backdrop-filter bg-white/10 dark:bg-black/20 shadow-lg' : ''}
-      `}
-    >
-      <nav className="container max-w-4xl mx-auto px-4 md:px-0 py-4">
-        <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold">
-            {activeSection !== 'home' && (
-              <button onClick={() => setActiveSection('home')} className="hover:text-[var(--primary-color)] transition-colors">{process.env.NEXT_PUBLIC_NAME}</button>
-            )}
+    <>
+      <header
+        className={`
+          fixed left-0 right-0 top-0 z-50 transition-all duration-500 ease-in-out
+          ${activeSection !== 'home' ? 'backdrop-blur-md backdrop-filter bg-white/10 dark:bg-black/20 shadow-lg' : ''}
+        `}
+      >
+        <nav className="container max-w-4xl mx-auto px-4 md:px-0 py-4">
+          <div className="flex justify-between items-center">
+            <div className="text-2xl font-bold">
+              {activeSection !== 'home' && (
+                <button onClick={() => setActiveSection('home')} className="hover:text-[var(--primary-color)] transition-colors">{process.env.NEXT_PUBLIC_NAME}</button>
+              )}
+            </div>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex md:items-center md:space-x-4">
+              {renderNavItems()}
+              <ThemeToggle />
+            </div>
+            
+            {/* Mobile Menu Button */}
+            <MobileMenuButton isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           </div>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-4">
-            {renderNavItems()}
-            <ThemeToggle />
-          </div>
-          
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <ThemeToggle />
-            <button
-              id="menu-button"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-800 dark:text-white p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <div
-          id="mobile-menu"
-          className={`
-            fixed top-0 left-0 h-full w-64 bg-black/95 dark:bg-black/95 shadow-lg transform transition-transform duration-300 ease-in-out
-            ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
-            md:hidden z-[100] pt-16 px-4
-          `}
-        >
-          <ul className="flex flex-col space-y-4">
-            {navItems.map((item) => (
-              <li key={item.href} className="relative">
-                <button
-                  onClick={() => {
-                    setActiveSection(item.href);
-                    setIsMenuOpen(false);
-                  }}
-                  className={`
-                    w-full text-left px-4 py-2 hover:text-[var(--primary-color)] transition-colors
-                    ${activeSection === item.href ? 'text-[var(--primary-color)]' : 'text-white'}
-                  `}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
-    </header>
+        </nav>
+      </header>
+      
+      {/* Mobile Menu */}
+      <MobileMenu 
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        navItems={navItems}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+      />
+    </>
   );
 }

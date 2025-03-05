@@ -40,7 +40,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       <div 
         id="chat-container" 
         ref={chatContainerRef}
-        className="w-full max-h-[70vh] min-h-[100px] bg-gray-900 rounded-lg overflow-hidden flex flex-col"
+        className="w-full max-h-[70vh] min-h-[250px] bg-gray-900 rounded-lg overflow-hidden flex flex-col"
       >
         {/* Messages container */}
         <div className="flex-1 overflow-y-auto p-4 this_scroll">

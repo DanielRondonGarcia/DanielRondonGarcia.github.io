@@ -2,7 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['www.gravatar.com', 'n8n.rondon.cloud'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.gravatar.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'n8n.rondon.cloud',
+      },
+    ],
   },
 }
 
