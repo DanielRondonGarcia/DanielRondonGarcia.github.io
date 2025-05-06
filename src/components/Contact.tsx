@@ -12,6 +12,7 @@ const Contact: React.FC = () => {
       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
       {
         from_name: formData.name,
+        customer_name: formData.name,
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
