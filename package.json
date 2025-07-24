@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "slides:build": "npm run slides:html && npm run slides:images && npm run slides:assets",
+    "slides:html": "marp --theme-set slides/themes --html --allow-local-files --bespoke.progress true --bespoke.transition -I slides -o public/slides",
+    "slides:images": "marp --theme-set slides/themes --image png -I slides -o public/images",
+    "slides:assets": "xcopy \"slides\\images\\*\" \"public\\slides\\images\\\" /E /I /Y >nul 2>&1 & xcopy \"slides\\themes\\*\" \"public\\slides\\themes\\\" /E /I /Y >nul 2>&1 & copy \"slides\\whiteboard.js\" \"public\\slides\\whiteboard.js\" >nul 2>&1",
+    "slides:serve": "marp -I slides -w -s --theme-set slides/themes",
+    "slides:clean": "del public\\slides\\*.html 2>nul & del public\\images\\*.png 2>nul & rmdir /S /Q public\\slides\\images 2>nul & rmdir /S /Q public\\slides\\themes 2>nul & del public\\slides\\whiteboard.js 2>nul",
+    "slides:list": "dir public\\slides\\*.html 2>nul || echo No hay archivos HTML && dir public\\images\\*.png 2>nul || echo No hay imágenes PNG",
+    "build:all": "npm run slides:build && npm run build"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",

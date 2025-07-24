@@ -1,28 +1,53 @@
 import ContentCard from './ContentCard';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import ArticleCard from './ArticleCard';
+import { presentationsToArticles } from '../config/presentations';
 
 interface Article {
   title: string;
   category: string;
   image: string;
   link: string;
+  type: 'article' | 'presentation';
 }
 
 const Articles: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('ALL');
+  const [presentations, setPresentations] = useState<Article[]>([]);
 
-  const filters = ['ALL', 'MONITORING'];
+  const filters = ['ALL', 'MONITORING', 'PRESENTATIONS', 'DEVOPS'];
 
-  const articles: Article[] = [
-    { title: 'Artemis', category: 'MONITORING', image: '/images/artemis.webp', link: 'https://docs.actsis.com/blog/nuevos-paneles' },
+  // Artículos estáticos
+  const staticArticles: Article[] = [
+    { 
+      title: 'Artemis', 
+      category: 'MONITORING', 
+      image: '/images/artemis.webp', 
+      link: 'https://docs.actsis.com/blog/nuevos-paneles',
+      type: 'article'
+    },
   ];
 
+  // Cargar presentaciones al montar el componente
+  useEffect(() => {
+    const marpPresentations = presentationsToArticles();
+    setPresentations(marpPresentations);
+  }, []);
+
+  // Combinar artículos estáticos y presentaciones
+  const allArticles = useMemo(() => {
+    return [...staticArticles, ...presentations];
+  }, [presentations]);
+
   const filteredArticles = useMemo(() => {
-    return activeFilter === 'ALL'
-      ? articles
-      : articles.filter(article => article.category === activeFilter);
-  }, [activeFilter, articles]);
+    if (activeFilter === 'ALL') {
+      return allArticles;
+    }
+    if (activeFilter === 'PRESENTATIONS') {
+      return allArticles.filter(article => article.type === 'presentation');
+    }
+    return allArticles.filter(article => article.category === activeFilter);
+  }, [activeFilter, allArticles]);
 
   return (
     <ContentCard subtitle="PORTFOLIO" title="MY ARTICLES">
@@ -49,6 +74,7 @@ const Articles: React.FC = () => {
             category={article.category}
             image={article.image}
             link={article.link}
+            type={article.type}
           />
         ))}
       </div>

@@ -5,9 +5,10 @@ interface ArticleCardProps {
   category: string;
   image: string;
   link: string;
+  type?: 'article' | 'presentation';
 }
 
-const ArticleCard: React.FC<ArticleCardProps> = ({ title, category, image, link }) => {
+const ArticleCard: React.FC<ArticleCardProps> = ({ title, category, image, link, type = 'article' }) => {
   return (
     <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md transition-all duration-300 hover:text-[var(--primary-color-500)] group relative">
       <div className="relative h-48">
@@ -15,9 +16,11 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, category, image, link 
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <a
             href={link}
+            target={type === 'presentation' ? '_blank' : '_self'}
+            rel={type === 'presentation' ? 'noopener noreferrer' : undefined}
             className="text-white dark:text-gray-900 px-4 py-2 rounded-full font-semibold bg-[var(--primary-color-500)] hover:bg-[var(--primary-color-600)] transition-colors duration-300"
           >
-            Read More
+            {type === 'presentation' ? 'View Slides' : 'Read More'}
           </a>
         </div>
       </div>

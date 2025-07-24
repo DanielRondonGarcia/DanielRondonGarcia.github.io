@@ -1,0 +1,97 @@
+/* @theme base */
+
+@import 'default';
+
+section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+section.lead {
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+section.toc {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+h1 {
+  color: #ffffff;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+h2 {
+  color: #f0f0f0;
+  border-bottom: 2px solid #ffffff;
+  padding-bottom: 0.3em;
+}
+
+h3 {
+  color: #e0e0e0;
+}
+
+code {
+  background: rgba(255,255,255,0.1);
+  color: #ffeb3b;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+pre {
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  padding: 1em;
+}
+
+blockquote {
+  border-left: 4px solid #ffffff;
+  background: rgba(255,255,255,0.1);
+  padding: 1em;
+  margin: 1em 0;
+}
+
+a {
+  color: #ffeb3b;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  color: #ffeb3b;
+}
+
+em {
+  color: #e0e0e0;
+  font-style: italic;
+}
+
+ul, ol {
+  margin: 1em 0;
+}
+
+li {
+  margin: 0.5em 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+th, td {
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.5em;
+  text-align: left;
+}
+
+th {
+  background: rgba(255,255,255,0.1);
+  font-weight: bold;
+}

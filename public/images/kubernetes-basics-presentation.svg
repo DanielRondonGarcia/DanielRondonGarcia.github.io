@@ -1,0 +1,82 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="k8sBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#326ce5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a4480;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="k8sIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8f4fd;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#k8sBgGradient)" rx="12"/>
+  
+  <!-- Kubernetes Logo (Simplified) -->
+  <g transform="translate(200, 120)">
+    <!-- Main circle -->
+    <circle cx="0" cy="0" r="50" fill="url(#k8sIconGradient)" stroke="#326ce5" stroke-width="3"/>
+    
+    <!-- Helm/Wheel spokes -->
+    <g stroke="#326ce5" stroke-width="4" fill="none">
+      <!-- Vertical spoke -->
+      <line x1="0" y1="-35" x2="0" y2="35"/>
+      <!-- Horizontal spoke -->
+      <line x1="-35" y1="0" x2="35" y2="0"/>
+      <!-- Diagonal spokes -->
+      <line x1="-25" y1="-25" x2="25" y2="25"/>
+      <line x1="25" y1="-25" x2="-25" y2="25"/>
+    </g>
+    
+    <!-- Center circle -->
+    <circle cx="0" cy="0" r="8" fill="#326ce5"/>
+    
+    <!-- Outer decorative elements -->
+    <g fill="#326ce5">
+      <circle cx="0" cy="-40" r="4"/>
+      <circle cx="0" cy="40" r="4"/>
+      <circle cx="-40" cy="0" r="4"/>
+      <circle cx="40" cy="0" r="4"/>
+    </g>
+  </g>
+  
+  <!-- Container boxes -->
+  <g transform="translate(80, 80)" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2">
+    <rect x="0" y="0" width="20" height="15" rx="2"/>
+    <rect x="0" y="20" width="20" height="15" rx="2"/>
+    <rect x="25" y="0" width="20" height="15" rx="2"/>
+    <rect x="25" y="20" width="20" height="15" rx="2"/>
+  </g>
+  
+  <g transform="translate(300, 180)" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2">
+    <rect x="0" y="0" width="20" height="15" rx="2"/>
+    <rect x="0" y="20" width="20" height="15" rx="2"/>
+    <rect x="25" y="0" width="20" height="15" rx="2"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">Kubernetes</text>
+  <text x="200" y="65" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Arial, sans-serif" font-size="16">Fundamentals</text>
+  
+  <!-- Bottom decorative elements -->
+  <g transform="translate(200, 250)">
+    <!-- Pod representations -->
+    <g fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1">
+      <circle cx="-60" cy="0" r="12"/>
+      <circle cx="0" cy="0" r="12"/>
+      <circle cx="60" cy="0" r="12"/>
+    </g>
+    
+    <!-- Connection lines -->
+    <g stroke="white" stroke-width="2" fill="none">
+      <line x1="-48" y1="0" x2="-12" y2="0"/>
+      <line x1="12" y1="0" x2="48" y2="0"/>
+    </g>
+    
+    <!-- Labels -->
+    <text x="-60" y="5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Pod</text>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Pod</text>
+    <text x="60" y="5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Pod</text>
+  </g>
+</svg>
