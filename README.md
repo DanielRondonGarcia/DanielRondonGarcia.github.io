@@ -236,10 +236,10 @@ npm run lint             # Linter de código
 ### Comandos de Presentaciones
 ```bash
 # Comandos individuales
-npm run slides:html      # Generar archivos HTML de presentaciones
-npm run slides:images    # Generar imágenes PNG de presentaciones
+npm run slides:html      # Generar archivos HTML de presentaciones (usa npx marp)
+npm run slides:images    # Generar imágenes PNG de presentaciones (usa npx marp)
 npm run slides:assets    # Copiar assets (images/, themes/, whiteboard.js) a public/
-npm run slides:serve     # Servidor de desarrollo para presentaciones
+npm run slides:serve     # Servidor de desarrollo para presentaciones (usa npx marp)
 npm run slides:clean     # Limpiar archivos generados
 npm run slides:list      # Listar archivos generados
 
@@ -247,6 +247,8 @@ npm run slides:list      # Listar archivos generados
 npm run slides:build     # Generar HTML + imágenes + assets (slides:html + slides:images + slides:assets)
 npm run build:all        # Build completo (slides:build + build)
 ```
+
+**📋 Nota:** Los scripts ahora usan `npx marp` y son **multiplataforma** (Windows/Linux/macOS), compatibles con GitHub Actions.
 
 ### Scripts PowerShell (Opcionales)
 ```powershell
@@ -406,13 +408,19 @@ git push
 
 **Solución:**
 ```bash
-# Copiar assets automáticamente
+# Copiar assets automáticamente (multiplataforma)
 npm run slides:assets
 
-# O manualmente:
+# O manualmente en Windows:
 xcopy "slides\images\*" "public\slides\images\" /E /I /Y
 xcopy "slides\themes\*" "public\slides\themes\" /E /I /Y
 copy "slides\whiteboard.js" "public\slides\whiteboard.js"
+
+# O manualmente en Linux/macOS:
+mkdir -p public/slides/images public/slides/themes
+cp -r slides/images/* public/slides/images/
+cp -r slides/themes/* public/slides/themes/
+cp slides/whiteboard.js public/slides/
 ```
 
 **Estructura resultante:**
