@@ -122,6 +122,65 @@ marp-pre {
     border-color: var(--highlight-high);
 }
 
+/* Global code blocks with terminal dots */
+pre {
+    background-color: var(--overlay);
+    border: 1px solid var(--highlight-low);
+    border-radius: 8px;
+    padding: 2.5em 1em 1em 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    font-size: 0.9em;
+    position: relative;
+    /* Custom scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--highlight-high) var(--overlay);
+}
+
+/* Terminal window dots for all code blocks */
+pre::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    width: 12px;
+    height: 12px;
+    background-color: #ff5f56;
+    border-radius: 50%;
+    box-shadow: 
+        20px 0 0 #ffbd2e,
+        40px 0 0 #27ca3f;
+}
+
+/* Webkit scrollbar customization for code blocks */
+pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: var(--overlay);
+    border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb {
+    background: var(--highlight-high);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+    background: var(--subtle);
+}
+
+/* Remove scrollbar arrows */
+pre::-webkit-scrollbar-button {
+    display: none;
+}
+
+pre::-webkit-scrollbar-corner {
+    background: var(--overlay);
+}
+
 /* Code block syntax highlighting */
 .hljs-comment {
     color: var(--muted);

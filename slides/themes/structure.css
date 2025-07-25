@@ -421,10 +421,26 @@ section.split-columns pre {
     background-color: var(--overlay, #393552);
     border: 1px solid var(--highlight-low, #2a283e);
     border-radius: 8px;
-    padding: 1em;
+    padding: 2.5em 1em 1em 1em;
     margin: 1em 0;
     overflow-x: auto;
     font-size: 0.9em;
+    position: relative;
+}
+
+/* Terminal window dots */
+section.split-columns pre::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    width: 12px;
+    height: 12px;
+    background-color: #ff5f56;
+    border-radius: 50%;
+    box-shadow: 
+        20px 0 0 #ffbd2e,
+        40px 0 0 #27ca3f;
 }
 
 section.split-columns code {
