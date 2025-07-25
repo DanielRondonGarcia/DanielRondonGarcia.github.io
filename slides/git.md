@@ -431,7 +431,7 @@ Ventajas para Equipos Empresariales:
 
 ## Ejemplo SVN
 
-![Git Image](./images/git/svn-flow.webp)
+<img src="./images/git/svn-flow.webp" width="600"/>
 
 ---
 
@@ -563,12 +563,6 @@ th:last-child, td:last-child {
 | **test** | Tests |
 | **docs** | Documentación |
 | **build** | Refactorización |
-| **ci** | Integración continua |
-| **style** | Formateo de código |
-| **wip** | Trabajo en progreso |
-| **refactor** | Mejoras de código |
-| **perf** | Rendimiento |
-| **revert** | Revierte commit |
 
 ---
 
