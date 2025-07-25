@@ -250,11 +250,40 @@ npm run build:all        # Build completo (slides:build + build)
 
 **📋 Nota:** Los scripts ahora usan `npx marp` y son **multiplataforma** (Windows/Linux/macOS), compatibles con GitHub Actions.
 
-### Scripts PowerShell (Opcionales)
-```powershell
-.\new-presentation.ps1   # Crear nueva presentación interactivamente
-.\build-slides.ps1       # Script alternativo para generar presentaciones
+### 🪟 Desarrollo en Windows
+
+Para desarrollo en Windows, puedes usar tanto los comandos npm como el script de PowerShell incluido:
+
+#### Opción 1: Comandos npm (Recomendado)
+```bash
+npm install              # Instalar dependencias (incluye @marp-team/marp-cli)
+npm run slides:build     # Generar presentaciones
+npm run dev              # Servidor de desarrollo
 ```
+
+#### Opción 2: Script PowerShell
+```powershell
+# Instalar dependencias primero
+npm install
+
+# Usar script PowerShell
+.\build-slides.ps1                    # Generar todas las presentaciones
+.\build-slides.ps1 -Action all        # Generar todas las presentaciones
+.\build-slides.ps1 -Action assets     # Copiar solo assets (imágenes, temas)
+.\build-slides.ps1 -Action clean      # Limpiar archivos generados
+.\build-slides.ps1 -Action help       # Mostrar ayuda
+.\build-slides.ps1 -Action single -File nombre.md # Generar una presentación específica
+
+# Script para crear nuevas presentaciones
+.\new-presentation.ps1   # Crear nueva presentación interactivamente
+```
+
+**Características del script PowerShell:**
+- ✅ Usa `npx marp` (no requiere instalación global)
+- ✅ Copia automáticamente assets (imágenes, temas, whiteboard.js)
+- ✅ Crea directorios necesarios automáticamente
+- ✅ Manejo de errores y mensajes informativos
+- ✅ Equivalente a los comandos npm pero con interfaz PowerShell nativa
 
 ### Flujo de Trabajo Recomendado
 

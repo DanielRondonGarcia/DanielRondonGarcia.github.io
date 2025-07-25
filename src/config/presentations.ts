@@ -14,22 +14,13 @@ export interface PresentationConfig {
 // Lista de presentaciones disponibles
 export const presentations: PresentationConfig[] = [
   {
-    id: 'template',
-    title: 'Template',
+    id: 'git',
+    title: 'Fundamentos de GIT',
     category: 'DEVOPS',
-    description: 'PLantilla base',
-    tags: ['devops', 'ci/cd', 'automation', 'monitoring'],
-    createdAt: '2024-01-15',
-    updatedAt: '2024-01-15'
-  },
-  {
-    id: 'kubernetes-basics',
-    title: 'Kubernetes Fundamentals',
-    category: 'DEVOPS',
-    description: 'Fundamentos de Kubernetes, conceptos básicos y arquitectura',
-    tags: ['kubernetes', 'containers', 'orchestration', 'devops'],
-    createdAt: '2024-01-15',
-    updatedAt: '2024-01-15'
+    description: 'Fundamentos de GIT',
+    tags: ['devops', 'SCM', 'versionamiento'],
+    createdAt: '2025-07-24',
+    updatedAt: '2024-07-25'
   }
   // Agregar más presentaciones aquí...
 ];

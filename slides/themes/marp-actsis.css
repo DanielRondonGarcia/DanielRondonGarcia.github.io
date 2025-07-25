@@ -1,0 +1,333 @@
+/* @theme marp-actsis */
+/*
+ * @theme marp-actsis
+ * @author DanielRondonGarcia
+ * @version 1.0.0
+ * @description Tema ACTSIS para presentaciones Marp basado en Rose Pine Moon con elementos geométricos
+ * Basado en Rose Pine theme por RAINBOWFLESH
+ */
+
+@import "default";
+@import "schema";
+@import "structure";
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+    /* ACTSIS Color Palette */
+    --base: #000000;
+    --surface: #1a1a1a;
+    --overlay: #2a2a2a;
+    --muted: #666666;
+    --subtle: #888888;
+    --text: #ffffff;
+    --love: #ff6b6b;
+    --gold: #ffd93d;
+    --rose: #ff8a95;
+    --pine: #6bcf7f;
+    --foam: #4ecdc4;
+    --iris: #a8e6cf;
+    --highlight-low: #1a1a1a;
+    --highlight-muted: #333333;
+    --highlight-high: #4a4a4a;
+
+    /* ACTSIS specific variables */
+    --actsis-primary: #000000;
+    --actsis-secondary: #ffffff;
+    --actsis-accent: #f0f0f0;
+    --actsis-text: #ffffff;
+    --actsis-text-dark: #000000;
+    --actsis-font: 'Nunito', sans-serif;
+
+    font-family: var(--actsis-font), ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol,
+        "Noto Color Emoji";
+    font-weight: initial;
+    background-color: var(--base);
+}
+
+/* Common style - Basado en Rose Pine Moon */
+h1 {
+    color: var(--rose);
+    padding-bottom: 2mm;
+    margin-bottom: 12mm;
+    font-family: var(--actsis-font);
+    font-weight: 700;
+}
+h2 {
+    color: var(--rose);
+    font-family: var(--actsis-font);
+    font-weight: 600;
+}
+h3 {
+    color: var(--rose);
+    font-family: var(--actsis-font);
+    font-weight: 600;
+}
+h4 {
+    color: var(--rose);
+    font-family: var(--actsis-font);
+    font-weight: 600;
+}
+h5 {
+    color: var(--rose);
+    font-family: var(--actsis-font);
+    font-weight: 600;
+}
+h6 {
+    color: var(--rose);
+    font-family: var(--actsis-font);
+    font-weight: 600;
+}
+a {
+    color: var(--iris);
+}
+p {
+    font-size: 16pt;
+    font-weight: 600;
+    color: var(--text);
+    font-family: var(--actsis-font);
+}
+code {
+    color: var(--text);
+    background-color: var(--highlight-muted);
+    font-family: 'Fira Code', monospace;
+}
+text {
+    color: var(--text);
+}
+ul {
+    color: var(--subtle);
+}
+li {
+    color: var(--subtle);
+}
+img {
+    background-color: var(--highlight-low);
+}
+strong {
+    color: var(--text);
+    font-weight: inherit;
+    font-weight: 800;
+}
+mjx-container {
+    color: var(--text);
+}
+marp-pre {
+    background-color: var(--overlay);
+    border-color: var(--highlight-high);
+}
+
+/* Code block syntax highlighting */
+.hljs-comment {
+    color: var(--muted);
+}
+.hljs-attr {
+    color: var(--foam);
+}
+.hljs-punctuation {
+    color: var(--subtle);
+}
+.hljs-string {
+    color: var(--gold);
+}
+.hljs-title {
+    color: var(--foam);
+}
+.hljs-keyword {
+    color: var(--pine);
+}
+.hljs-variable {
+    color: var(--text);
+}
+.hljs-literal {
+    color: var(--rose);
+}
+.hljs-type {
+    color: var(--love);
+}
+.hljs-number {
+    color: var(--gold);
+}
+.hljs-built_in {
+    color: var(--love);
+}
+.hljs-params {
+    color: var(--iris);
+}
+.hljs-symbol {
+    color: var(--foam);
+}
+.hljs-meta {
+    color: var(--subtle);
+}
+
+/* ===== ACTSIS Lead Section ===== */
+/* lead class: first slide in a section. Use h1 as header.
+Use: <!-- _class: lead --> */
+section.lead {
+    background-color: var(--base);
+    text-align: center;
+    color: var(--text);
+    padding: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section.lead h1, section.lead h2, section.lead p, section.lead a {
+    color: var(--text);
+    padding: 0.5em;
+    background-color: inherit;
+    margin-bottom: 0;
+}
+section.lead footer, section.lead header, section.lead:after {
+    /* hide header, footer and pagination */
+    display: none;
+}
+section.lead::before {
+    /* logo in white */
+    filter: brightness(0) invert(1);
+}
+
+/* Logo ACTSIS por defecto */
+section::before {
+    content: "";
+    width: 9%;
+    height: 10%;
+    position: absolute;
+    right: 2.5%;
+    top: 2%;
+    background: url('./themes/actsis/logo-actsis.svg') no-repeat center/contain;
+    filter: brightness(0) invert(1);
+}
+
+/* ===== ACTSIS First Slide ===== */
+/* first slide (main title). Use h1 as header.
+Use: <!-- _class: first-slide --> */
+section.first-slide {
+    background-image: url('./themes/actsis/bg1.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 60px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Ocultar logo en first-slide */
+section.first-slide::before {
+    display: none;
+}
+
+/* Contenedor para centrar y limitar ancho del texto */
+section.first-slide > * {
+    max-width: 700px;
+    width: 100%;
+}
+
+section.first-slide h1 {
+    color: var(--text);
+    font-size: 2.8em;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    font-family: var(--actsis-font);
+}
+
+section.first-slide h2 {
+    color: var(--text);
+    font-size: 1.5em;
+    font-weight: 400;
+    margin-bottom: 1em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    font-family: var(--actsis-font);
+}
+
+section.first-slide p {
+    color: var(--text);
+    font-size: 1em;
+    font-weight: 300;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    font-family: var(--actsis-font);
+}
+
+section.first-slide a {
+    color: var(--iris);
+    text-decoration: none;
+    font-family: var(--actsis-font);
+}
+
+section.first-slide header {
+    /* hide header only */
+    display: none;
+}
+
+section.first-slide footer {
+    display: none;
+}
+
+/* Mostrar footer y paginación en first-slide pero con estilos especiales */
+section.first-slide footer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text);
+    font-size: 0.9em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    z-index: 10;
+}
+
+section.first-slide:after {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    color: var(--text);
+    font-size: 0.9em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    z-index: 10;
+}
+
+/* ===== ACTSIS Last Slide ===== */
+/* last-slide class (Thanks)
+Use: <!-- _class: last-slide --> */
+section.last-slide {
+    background: var(--base);
+    background-image: 
+        url('./themes/actsis/geometric-pattern.svg'),
+        url('./themes/actsis/lines1.svg');
+    background-size: cover, contain;
+    background-position: center, bottom left;
+    background-repeat: no-repeat, no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+section.last-slide h1 {
+    color: var(--rose);
+    font-size: 3em;
+    margin-bottom: 1em;
+    font-family: var(--actsis-font);
+}
+
+section.last-slide h2, section.last-slide p {
+    color: var(--text);
+    font-family: var(--actsis-font);
+}
+
+section.last-slide footer, section.last-slide:after {
+    /* hide footer and pagination */
+    display: none;
+}
+
+section.last-slide a {
+    color: var(--iris);
+}

@@ -21,6 +21,33 @@ function New-DirectoryIfNotExists {
     }
 }
 
+# Función para copiar assets
+function Copy-SlidesAssets {
+    Write-Host "Copiando assets de presentaciones..." -ForegroundColor Cyan
+    
+    # Crear directorios de destino
+    New-DirectoryIfNotExists "$PublicSlidesDir/images"
+    New-DirectoryIfNotExists "$PublicSlidesDir/themes"
+    
+    # Copiar imágenes
+    if (Test-Path "$SlidesDir/images") {
+        Copy-Item -Path "$SlidesDir/images/*" -Destination "$PublicSlidesDir/images/" -Recurse -Force
+        Write-Host "[OK] Imágenes copiadas" -ForegroundColor Green
+    }
+    
+    # Copiar temas
+    if (Test-Path "$SlidesDir/themes") {
+        Copy-Item -Path "$SlidesDir/themes/*" -Destination "$PublicSlidesDir/themes/" -Recurse -Force
+        Write-Host "[OK] Temas copiados" -ForegroundColor Green
+    }
+    
+    # Copiar whiteboard.js
+    if (Test-Path "$SlidesDir/whiteboard.js") {
+        Copy-Item -Path "$SlidesDir/whiteboard.js" -Destination "$PublicSlidesDir/whiteboard.js" -Force
+        Write-Host "[OK] whiteboard.js copiado" -ForegroundColor Green
+    }
+}
+
 # Función para generar una presentación
 function Build-Presentation {
     param([string]$MarkdownFile)
@@ -30,7 +57,7 @@ function Build-Presentation {
     
     Write-Host "Generando: $MarkdownFile -> $OutputFile" -ForegroundColor Yellow
     
-    $MarpCommand = "marp --theme-set $ThemesDir --html --allow-local-files --output `"$OutputFile`" `"$MarkdownFile`""
+    $MarpCommand = "npx marp --theme-set $ThemesDir --html --allow-local-files --output `"$OutputFile`" `"$MarkdownFile`""
     
     try {
         Invoke-Expression $MarpCommand
@@ -53,6 +80,9 @@ function Main {
             New-DirectoryIfNotExists $OutputDir
             New-DirectoryIfNotExists $PublicSlidesDir
             
+            # Copiar assets
+            Copy-SlidesAssets
+            
             # Obtener todos los archivos .md
             $MarkdownFiles = Get-ChildItem -Path $SlidesDir -Filter "*.md" | Where-Object { $_.Name -ne "README.md" }
             
@@ -69,6 +99,12 @@ function Main {
             }
             
             Write-Host "Proceso completado: $SuccessCount/$($MarkdownFiles.Count) presentaciones generadas" -ForegroundColor Green
+        }
+        
+        "assets" {
+            Write-Host "Copiando solo los assets..." -ForegroundColor Cyan
+            New-DirectoryIfNotExists $PublicSlidesDir
+            Copy-SlidesAssets
         }
         
         "clean" {
@@ -89,6 +125,7 @@ function Main {
             Write-Host "Comandos disponibles:" -ForegroundColor Cyan
             Write-Host "  .\build-slides.ps1                    - Generar todas las presentaciones"
             Write-Host "  .\build-slides.ps1 -Action all        - Generar todas las presentaciones"
+            Write-Host "  .\build-slides.ps1 -Action assets     - Copiar solo los assets (imágenes, temas, whiteboard.js)"
             Write-Host "  .\build-slides.ps1 -Action clean      - Limpiar archivos generados"
             Write-Host "  .\build-slides.ps1 -Action help       - Mostrar esta ayuda"
             Write-Host "  .\build-slides.ps1 -Action single -File nombre.md - Generar una presentación específica"
