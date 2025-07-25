@@ -560,16 +560,9 @@ bash ../.github/workflows/deploy.sh
 ```
 
 > note: You need change username to yours.
+
 ---
 
-## WIP
+<!-- _class: questions -->
 
-## TODO
-
-TODO: blog add kismet deploy
-
-TODO: blog add blog creation
-
-TODO: import 7.css, xp.css, 98.css, ios7.css
-
-TODO: import suanming
+Daniel G. Rondón García - <daniel.rondon@actsis.com>

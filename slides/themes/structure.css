@@ -518,3 +518,106 @@ section.split-columns code {
         font-size: 1em;
     }
 }
+
+/******************* questions section *****************************/
+
+/* Questions section with decorative background
+   Use: <!-- _class: questions -->
+   
+   ## ¿Preguntas?
+   
+   ¡Empecemos!
+*/
+
+section.questions {
+    background-image: url('./themes/actsis/pregunta.svg');
+    background-size: 60%;
+    background-position: center left;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    text-align: right;
+    position: relative;
+}
+
+/* Hide logo in questions section */
+section.questions::before {
+    display: none;
+}
+
+/* Typography for questions section */
+section.questions h1 {
+    font-size: 4em;
+    font-weight: 700;
+    color: var(--text, #ffffff);
+    margin-bottom: 0.3em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    line-height: 1.1;
+}
+
+section.questions h2 {
+    font-size: 3em;
+    font-weight: 600;
+    color: var(--rose, #ff8a95);
+    margin-bottom: 0.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    line-height: 1.2;
+}
+
+section.questions p {
+    font-size: 1.5em;
+    font-weight: 400;
+    color: var(--text, #ffffff);
+    margin-bottom: 1em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+section.questions strong {
+    color: var(--rose, #ff8a95);
+    font-weight: 700;
+}
+
+/* Responsive adjustments for questions section */
+@media (max-width: 980px) {
+    section.questions {
+        padding: 40px 60px 40px 30%;
+        background-size: cover;
+        background-position: center;
+    }
+    
+    section.questions h1 {
+        font-size: 3em;
+    }
+    
+    section.questions h2 {
+        font-size: 2.5em;
+    }
+    
+    section.questions p {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 640px) {
+    section.questions {
+        padding: 30px 40px;
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+        align-items: center;
+    }
+    
+    section.questions h1 {
+        font-size: 2.5em;
+    }
+    
+    section.questions h2 {
+        font-size: 2em;
+    }
+    
+    section.questions p {
+        font-size: 1.2em;
+    }
+}
