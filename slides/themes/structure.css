@@ -241,10 +241,10 @@ section.lead h1 {
     font-size: 3.5em;
     font-weight: 700;
     margin: 0;
-    padding: 0.8em 1.2em;
     background: transparent;
     border-radius: 20px;
     backdrop-filter: blur(15px);
+    color: white;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     max-width: 80%;
@@ -383,6 +383,17 @@ section.split-columns p {
     font-size: 1.1em;
 }
 
+/* Text styling for inverted columns - better contrast */
+section.split-columns.inverted .right-content p {
+    color: var(--muted, #6e6a86);
+    font-weight: 500;
+}
+
+section.split-columns.inverted .left-content p {
+    color: var(--text, #e0def4);
+    font-weight: 400;
+}
+
 section.split-columns ul,
 section.split-columns ol {
     padding-left: 1.5em;
@@ -445,6 +456,44 @@ section.split-columns pre::before {
 
 section.split-columns code {
     color: var(--love-down, #b4637a);
+}
+
+/* Highlight callout for "Mejor para" sections */
+section.split-columns .highlight-callout {
+    background: linear-gradient(135deg, var(--foam, #9ccfd8) 0%, var(--pine, #31748f) 100%);
+    color: var(--surface, #232136);
+    padding: 0.8em 1.2em;
+    border-radius: 8px;
+    margin-top: 1.5em;
+    font-weight: 600;
+    font-size: 0.95em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--foam-down, #56949f);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Alternative highlight for inverted columns */
+section.split-columns.inverted .highlight-callout {
+    background: linear-gradient(135deg, var(--rose, #ea9a97) 0%, var(--love, #eb6f92) 100%);
+    color: var(--base-down, #fbf4ea);
+    border: 1px solid var(--rose-down, #d7827e);
+}
+
+/* Subtle animation effect */
+section.split-columns .highlight-callout::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+section.split-columns .highlight-callout:hover::before {
+    left: 100%;
 }
 
 /* Responsive adjustments */

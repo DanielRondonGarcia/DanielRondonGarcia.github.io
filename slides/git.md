@@ -3,7 +3,7 @@ marp: true
 math: mathjax
 title: Fundamentos de GIT
 paginate: true
-footer: '[Inicio](git.html)'
+footer: "[Inicio](git.html)"
 theme: marp-actsis
 # theme: rose-pine
 # theme: rose-pine-dawn
@@ -91,7 +91,7 @@ img {
   background-color: var(--highlight-low);
 }
 strong {
-  color: var(--text);
+  color: var(--muted);
   font-weight: inherit;
   font-weight: 800;
 }
@@ -150,6 +150,7 @@ marp-pre {
 </style>
 
 # Fundamentos de GIT
+
 <!-- _class: first-slide -->
 
 2025
@@ -157,28 +158,33 @@ marp-pre {
 ---
 
 # Hoy hablamos de...
+
 <!-- _class: cool-list toc -->
 
-1. [¿Qué es Git?](#3)
-1. [¿En qué estamos trabajando?](#14)
-1. [¿Qué puede salir mal?](#32)
-1. [¿Qué podemos hacer para arreglarlo?](#48)
-1. [¿Hemos hecho un buen trabajo?](#62)
-1. [Ejemplos de antiguos alumnos](#69)
-1. [Referencias y ejercicios](#77)
+1. [Introducción y Cambio de Paradigma](#3)
+1. [Comandos Básicos de Git](#14)
+1. [Herramientas de Desarrollo](#32)
+1. [Sistemas que utilizan Git](#48)
+1. [Git Flow y Estrategias de Branching](#62)
+1. [Pull Requests vs SVN Merge](#69)
+1. [Conventional Commits](#77)
+1. [Versionamiento en Múltiples Empresas](#78)
 
 ---
 
-# ¿Qué es Git?
+# Introducción y Cambio de Paradigma
+
 <!-- _class: lead -->
 
 ---
 
-<!-- _class: lead -->
+## ¿Qué es Git?
 
-# Split Columns Component
+<!-- Mencionar que Linus Torvalds también creó Linux -->
 
-Ejemplo de uso del nuevo componente de dos columnas
+Git es un sistema de control de versiones distribuido creado por Linus Torvalds en 2005. A diferencia de SVN, cada copia local es un repositorio completo con historial completo.
+
+<!-- Transición: explicar las ventajas del modelo distribuido -->
 
 ---
 
@@ -186,380 +192,393 @@ Ejemplo de uso del nuevo componente de dos columnas
 
 <div class="left-content">
 
-# Columna Izquierda
-## Fondo Blanco
-
-- Contenido para la columna izquierda
-- Texto oscuro sobre fondo claro
-- Perfecto para contenido principal
-
-```javascript
-const leftColumn = {
-  background: 'white',
-  color: 'dark'
-};
-```
+![Git Image](./images/git/0e0d533e06ba460259c336f26fb88821e73b21a1.jpg)
 
 </div>
 
 <div class="right-content">
 
-# Columna Derecha
-## Fondo Oscuro
+<!-- La transición de SVN a Git representa un cambio fundamental de paradigma en el control de versiones. SVN utiliza un modelo centralizado donde existe un único servidor central que almacena todo el historial del proyecto, mientras que los desarrolladores trabajan con copias locales limitadas. En contraste, Git implementa un modelo distribuido donde cada clon del repositorio contiene el historial completo del proyecto. -->
 
-- Contenido para la columna derecha
-- Texto claro sobre fondo oscuro
-- Ideal para código o información secundaria
+## SVN vs Git: Arquitectura
 
-```css
-.right-content {
-  background: var(--surface);
-  color: var(--text);
-}
-```
+<!-- - Trabajo offline: Git permite mientras que SVN requiere conectividad para la mayoría de operaciones
+- Rendimiento: Las operaciones locales en Git son significativamente más rápidas al no requerir comunicación con el servidor
+- Integridad: Git utiliza checksums SHA-1/SHA-256 para garantizar la integridad de todos los datos -->
+
+- SVN: Modelo centralizado - Un servidor central, copias de trabajo locales
+- Git: Modelo distribuido - Cada clone es un repositorio completo
 
 </div>
 
 ---
 
-<!-- _class: split-columns inverted -->
+<!-- Una diferencia crucial es el sistema de identificación de commits. SVN utiliza números secuenciales incrementales (1, 2, 3...), mientras que Git emplea hashes criptográficos de 40 caracteres hexadecimales. Esta diferencia no es arbitraria:
+Los hashes en Git proporcionan ventajas fundamentales:
+- Unicidad global: Cada commit tiene un identificador único en cualquier repositorio
+- Integridad de datos: Cualquier cambio en el contenido genera un hash completamente diferente
+- Compatibilidad distribuida: Los hashes funcionan sin coordinación central -->
 
-<div class="left-content">
+## ¿Por qué hashes?
 
-# Columna Izquierda Invertida
-## Ahora Oscura
+Git usa SHA-1/SHA-256 para generar hashes de los commits, en lugar de números secuenciales porque:
 
-- Los colores están invertidos
-- Fondo oscuro en la izquierda
-- Texto claro sobre fondo oscuro
-
-### Características:
-- Flexibilidad total
-- Colores del tema Rose Pine Moon
-- Responsive design
-
-</div>
-
-<div class="right-content">
-
-# Columna Derecha Invertida
-## Ahora Clara
-
-- Fondo claro en la derecha
-- Texto oscuro sobre fondo claro
-- Perfecto contraste visual
-
-### Uso:
-```markdown
-<!-- _class: split-columns inverted -->
-
-<div class="left-content">
-Contenido izquierdo
-</div>
-
-<div class="right-content">
-Contenido derecho
-</div>
-```
-
-</div>
+- Funcionan en sistemas distribuidos
+- Garantizan integridad de datos
+- Permiten identificación única global
 
 ---
 
-<!-- _class: split-columns -->
-
-<div class="left-content">
-
-# Responsive Design
-
-## En pantallas grandes:
-- Dos columnas lado a lado
-- 50% del ancho cada una
-- Altura completa de la pantalla
-
-## En pantallas medianas (≤980px):
-- Columnas apiladas verticalmente
-- Altura mínima de 50vh cada una
-- Bordes horizontales en lugar de verticales
-
-</div>
-
-<div class="right-content">
-
-# Características Técnicas
-
-## Colores Rose Pine Moon:
-- **Base**: `#232136`
-- **Surface**: `#2a273f`
-- **Text**: `#e0def4`
-- **Rose**: `#ea9a97`
-- **Foam**: `#9ccfd8`
-- **Iris**: `#c4a7e7`
-
-## Tipografía optimizada:
-- H1: 2.5em, color rose
-- H2: 2em, color foam
-- H3: 1.5em, color iris
-
-</div>
-
----
+# Comandos Básicos de Git
 
 <!-- _class: lead -->
 
-# ¡Componente Listo!
+---
 
-Usa `split-columns` para crear layouts de dos columnas con el tema Rose Pine Moon
+## Equivalencias SVN → Git
+
+| SVN          | GIT        | Descripción                |
+| ------------ | ---------- | -------------------------- |
+| svn checkout | git clone  | Clonar repositorio         |
+| svn commit   | git commit | Confirmar cambios          |
+| svn update   | git pull   | Actualizar desde remoto    |
+| svn status   | git status | Ver estado de archivos     |
+| svn add      | git add    | Añadir archivos al control |
+| svn merge    | git merge  | Fusionar cambios           |
 
 ---
 
-## Test code block color
+<!-- Concepto de Staging Area:
+Una diferencia fundamental es el staging area de Git, un concepto inexistente en SVN. Esta área intermedia permite:
+- Commits granulares: Seleccionar exactamente qué cambios incluir
+- Revisión previa: Verificar cambios antes del commit
+- Flexibilidad: Modificar la selección de archivos a commitear -->
 
-Pythong
-
-```python
-class test_class
-def __superIdol
-    # A very super function
-    with open("myfile.txt", "r", encoding='utf8') as file:
-    for line in file:
-        print(line)
-    return Null
-```
-
----
-Jvav
-
-```java
-public class Hello {
-  // main method
-  public static void main(String[] args)
-  {
-    // Output: Hello, world!
-    System.out.println("Hello, world!");
-  }
-}
-```
-
----
-TypeScript
-
-```typescript
-mounted() {
-    console.log("Wanna try something big? y/n");
-    console.log("%c >> n", "color:red");
-  }
-```
-
----
-JavaScript
-
-```javascript
-// Named function
-function rocketToMars() {
-  return 'BOOM!';
-}
-const sum = (param1, param2) => {
-  return param1 + param2;
-};
-console.log(sum(2,5)); // => 7
-```
-
----
-Bash
+## Workflow Básico Git
 
 ```bash
-echo "wtf"
-```
-
----
-Rust
-
-```rust
-fn main(){
-  let mut array: [i32 ; 5] = [1,2,3,4,6];
-  let mut boo: true
-  print_arrays(array);
-  println!("The elements: {array:?}");
-}
-
-fn print_arrays(mut array:[i32; 5]) {
-  array[0] = 89;
-  array[1] = 90;
-  array[2] = 91;
-  array[3] = 92;
-  array[4] = 93;
-  println!("The elements: {array:?}");
-}
+# Clonar repositorio
+git clone <url>
+# Crear nueva rama
+git branch <nombre-rama>
+# Cambiar a la nueva rama
+git checkout <nombre-rama>
+# Realizar cambios y confirmar
+git add .
+git commit -m "Mensaje de commit"
+# Fusionar con la rama principal
+git merge main
+# Subir cambios al repositorio remoto
+git push origin <nombre-rama>
 ```
 
 ---
 
-Ruby
+# Herramientas de Desarrollo
 
-```ruby
-class Person < ApplicationRecord
-  validates :name, presence: true
-end
-
-```
-
----
-C++++
-
-```csharp
-class Hello {
-  // main method
-  static void Main(string[] args)
-  {
-    // Output: Hello, world!
-    Console.WriteLine("Hello, world!");
-  }
-}
-```
-
----
-PowerShell
-
-```powershell
-# Clock down
-echo starting...
-echo 'Please close manually if the windows no response.'
-# Boot app
-C:\Users\isri\AppData\Local\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.teslacoilsw.launcher
-echo 'app started'
-adb connect 127.0.0.1:58526
-
-# Get host ipv4
-echo 'getting host ipv4...'
-$MyIpv4 = Get-netipAddress | Where-Object {
-  $_.InterfaceAlias -eq 'Wi-Fi' -and $_.AddressFamily -eq 'IPv4'
-} | Select-Object IPAddress | Format-Table -HideTableHeaders | Out-String
-$MyIpv4 = $MyIpv4.Trim()
-
-# Set port
-$MyPort = 10809
-# Set Porxyaddr
-$Porxyaddr = $MyIpv4+':'+$MyPort
-# Set following proxy
-adb shell settings put global http_proxy $Porxyaddr
-
-echo 'The following proxy is'
-adb shell settings get global http_proxy
-Timeout /T 3
-exit
-```
-
----
-Cpp
-
-```cpp
-#include <iostream>
-using namespace std;
-int main()
-{
-    cout << "Hello, world!" << endl;
-    return 0;
-}
-```
-
----
-Golang
-
-```go
-package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, World!")
-}
-```
-
----
-Haskell
-
-```hs
-"hello" == "hello world"
-```
-
----
-SQL
-
-```sql
-create database world;
-use world;
-create table hello (
-    id int not null auto_increment,
-    name varchar(255) not null,
-    primary key (id)
-);
-```
+<!-- _class: lead -->
 
 ---
 
-# Another readme.md
+<!-- La línea de comandos de Git ofrece acceso completo a todas las funcionalidades: -->
 
-[![npm](https://98badges.now.sh/api/version)](1)
-[![gzip size](https://98badges.now.sh/api/size)](https://unpkg.com/98.css)
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+## Git CLI
 
-  <h3 align="center">Best-README-Template</h3>
+### <span style="color: #4ade80">Ventajas</span>
 
-  <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
-  </p>
+- Acceso completo a todas las funciones
+- Rápido y eficiente
+- Ideal para automatización
+
+### <span style="color: #f87171">Desventajas</span>
+
+- Curva de aprendizaje pronunciada
+- No visual
+
+---
+
+<!-- Herramienta oficial de GitHub para interfaces gráficas: -->
+
+## GitHub Desktop
+
+### <span style="color: #4ade80">Ventajas</span>
+
+- nterfaz simple e intuitiva
+- Integración perfecta con GitHub
+- Gratuito
+
+### <span style="color: #f87171">Desventajas</span>
+
+- Funcionalidades limitadas
+- Principalmente para GitHub
+
+---
+
+<!-- Extensión de Windows Explorer basada en TortoiseSVN: -->
+
+## TortoiseGit
+
+### <span style="color: #4ade80">Ventajas</span>
+
+- Integración con Windows Explorer
+- Familiar para usuarios de TortoiseSVN
+- Gratuito y open source
+
+### <span style="color: #f87171">Desventajas</span>
+
+- Solo disponible para Windows
+- Interfaz menos moderna
+- No es retrocompatible con otras herramientas de Git
+<!-- Otras Herramientas Destacadas:
+- SourceTree: GUI potente de Atlassian con soporte para Git Flow integrado
+- GitKraken: Cliente visual premium con excelente representación gráfica
+- Tower: Herramienta premium para Mac/Windows con características avanzadas
+- Visual Studio Code: Editor con excelente integración Git nativa -->
+
+---
+
+# Sistemas que utilizan Git
+
+<!-- _class: lead -->
+
+---
+
+<!-- _class: split-columns inverted -->
+
+<div class="left-content">
+
+# GitHub
+
+Hosting de código y colaboración
+
+## Fortalezas
+
+- Comunidad open source
+- Simplicidad
+- GitHub Actions
+
+<div class="highlight-callout">
+Mejor para: Proyectos open source, equipos pequeños
+</div>
+
+</div>
+
+<div class="right-content">
+
+# Azure DevOps
+
+Suite completa de DevOps
+
+## Fortalezas
+
+- Integración Microsoft
+- Project management
+- CI/CD robusto
+
+<div class="highlight-callout">
+Mejor para: Empresas, ecosistema Microsoft
+</div>
+
 </div>
 
 ---
 
-Blog page resource [repo](https://github.com/rainbowflesh/rainbowflesh.github.io).
+# Git Flow y Estrategias de Branching
 
-## Dev
+<!-- _class: lead -->
 
-I recommend use `pnpm` to manage package.
+---
 
-### Initialization
+## ¿Qué es Git Flow?
+Git Flow es una estrategia de branching creada por Vincent Driessen que define roles específicos para diferentes tipos de branches y reglas sobre cómo interactúan.
 
-```shell
-pnpm i
+---
+
+<!-- Git Flow: Modelo de Branching Estructurado
+- Git Flow, creado por Vincent Driessen en 2010, proporciona una estrategia de branching robusta para equipos grandes:
+- Branches Principales:
+- main/master: Código listo para producción
+- develop: Branch de integración para desarrollo activo
+
+Branches de Soporte:
+- feature/: Para desarrollo de nuevas funcionalidades
+- release/: Para preparación y estabilización de releases
+- hotfix/: Para correcciones urgentes en producción
+
+Flujo de Trabajo Git Flow:
+- Las features se desarrollan desde develop
+- Cuando están listas, se integran de vuelta a develop
+- Para releases, se crea branch release/ desde develop
+- Tras testing, se merge a main y develop
+- Hotfixes se crean desde main y se mergen a ambos branches
+
+Ventajas para Equipos Empresariales:
+- Separación clara de responsabilidades
+- Procesos de release predecibles
+- Soporte para múltiples versiones en producción
+- Integración natural con procesos de QA -->
+## Branches Principales
+
+- `main/master`: Código listo para producción
+- `develop`: Branch de integración para desarrollo
+
+### Branches de soporte:
+
+- `feature/*`: Nuevas funcionalidades
+- `release/*`: Preparación de releases
+- `hotfix/*`: Correcciones urgentes
+---
+
+## Ejemplo SVN
+
+![Git Image](./images/git/svn-flow.webp)
+
+---
+
+<!-- Caso de un hotfix con respecto al tiempo -->
+## Ejemplo GIT - Caso 1
+
+<img src="./images/git/git-flow1.webp" width="600"/>
+
+---
+
+<!-- (Caso raro) Problema cuando se necesita hacer un hotfix
+especificamente a una versión que solo la tiene
+una sola empresa, ya existen versiones superiores
+y ese ajuste tambien lo necesita las futuras versiones -->
+## Ejemplo GIT - Caso 2
+
+<img src="./images/git/git-flow2.webp" width="600"/>
+
+---
+
+# Pull Requests vs SVN Merge
+
+<!-- _class: lead -->
+
+---
+
+## SVN: Merge Tradicional
+
+- Merge directo al trunk
+- Sin proceso de revisión formal
+- Conflictos se resuelven durante el merge
+- Menos colaborativo
+
+---
+
+<!-- _class: split-columns -->
+
+<div class="left-content">
+
+![Git Image](./images/git/git-pr.jpg)
+
+</div>
+
+<div class="right-content">
+
+<!-- Evolución del Proceso de Integración
+La transición de SVN a Git representa una evolución significativa en cómo se integran los cambios de código:
+
+Proceso Tradicional SVN:
+- Merge directo al trunk sin revisión formal
+- Resolución de conflictos durante el merge
+- Proceso menos colaborativo
+- Limitadas oportunidades de feedback
+
+Pull Requests en Git:
+- Propuesta de cambios: Los desarrolladores proponen integraciones
+- Code review obligatorio: Revisión por pares antes del merge
+- Discusión contextual: Comentarios específicos en líneas de código
+- Pruebas automatizadas: Integración con CI/CD antes del merge
+- Aprobaciones formales: Requerimiento de aprobaciones antes de la integración
+
+Beneficios del Modelo Pull Request:
+- Mayor calidad de código través de revisiones
+- Conocimiento compartido del codebase
+- Documentación implícita de decisiones técnicas
+- Detección temprana de problemas
+- Proceso más estructurado y auditable -->
+
+## En GIT:
+- Propuesta de cambios
+- Code review obligatorio
+- Discusión y feedback
+- Pruebas automáticas
+- Merge tras aprobación
+
+</div>
+
+---
+
+# Conventional Commits
+
+<!-- _class: lead -->
+
+---
+
+## ¿Qué son los Conventional Commits?
+Especificación ligera sobre mensajes de commit que proporciona reglas para crear historial de commits explícito y facilita herramientas automatizadas.
+
+---
+
+## Estructura
+
+```bash
+tipo(ámbito):requerimiento descripción
+
+[cuerpo]
+
+[footer]
+
+Ejemplos:
+feat:98311 agregar función de login
+fix(api):98311 resolver error en endpoint usuarios
+feat!:98311 cambio que rompe compatibilidad
 ```
 
 ---
 
-### Run dev
+## Tipos de Commits
 
-```shell
-pnpm dev
-```
+<style>
+table {
+  font-size: 0.9em;
+  width: 100%;
+  table-layout: fixed;
+}
+th:first-child, td:first-child {
+  width: 20%;
+}
+th:last-child, td:last-child {
+  width: 80%;
+}
+</style>
 
-### Build
+| Tipo | Descripción |
+|------|-------------|
+| **feat** | Nueva funcionalidad |
+| **fix** | Corrección de errores |
+| **chore** | Tareas rutinarias |
+| **test** | Tests |
+| **docs** | Documentación |
+| **build** | Refactorización |
+| **ci** | Integración continua |
+| **style** | Formateo de código |
+| **wip** | Trabajo en progreso |
+| **refactor** | Mejoras de código |
+| **perf** | Rendimiento |
+| **revert** | Revierte commit |
 
-```shell
-pnpm build
-```
+---
 
-### Deploy
+## Automatización
+Los Conventional Commits permiten:
 
-```shell
-bash ../.github/workflows/deploy.sh
-```
-
-> note: You need change username to yours.
+- Generación automática de CHANGELOG
+- Semantic versioning automático
+- Triggers para CI/CD
+- Mejor documentación del proyecto
 
 ---
 

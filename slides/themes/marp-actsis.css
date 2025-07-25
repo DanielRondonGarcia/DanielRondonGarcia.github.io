@@ -127,8 +127,7 @@ pre {
     background-color: var(--overlay);
     border: 1px solid var(--highlight-low);
     border-radius: 8px;
-    padding: 2.5em 1em 1em 1em;
-    margin: 1em 0;
+    padding: 1.5em 1em 1em 1em;
     overflow-x: auto;
     font-size: 0.9em;
     position: relative;
@@ -297,6 +296,7 @@ section.first-slide h1 {
     font-weight: 700;
     margin-bottom: 0.5em;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    color: white;
     font-family: var(--actsis-font);
 }
 
