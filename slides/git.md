@@ -156,29 +156,21 @@ marp-pre {
 
 ---
 
-## How to use
+# Hoy hablamos de...
+<!-- _class: cool-list toc -->
 
-Put this to vscode setting
+1. [¿Qué es Git?](#3)
+1. [¿En qué estamos trabajando?](#14)
+1. [¿Qué puede salir mal?](#32)
+1. [¿Qué podemos hacer para arreglarlo?](#48)
+1. [¿Hemos hecho un buen trabajo?](#62)
+1. [Ejemplos de antiguos alumnos](#69)
+1. [Referencias y ejercicios](#77)
 
-```json
-{
-    // etc...
-    "markdown.marp.themes": [
-      "https://raw.githubusercontent.com/rainbowflesh/Marp/master/css/rosepine-dawn.css",
-      "https://raw.githubusercontent.com/rainbowflesh/Marp/master/css/rosepine-moon.css",
-      "https://raw.githubusercontent.com/rainbowflesh/Marp/master/css/rosepine.css",
-    ]
-    // etc...
-}
-```
+---
 
-### I am H3 Title
-
-#### I am H4
-
-##### H5?
-
-###### H6 juesus
+# ¿Qué es Git?
+<!-- _class: lead -->
 
 ---
 

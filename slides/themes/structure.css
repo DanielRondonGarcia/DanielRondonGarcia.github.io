@@ -1,0 +1,285 @@
+/*
+@theme structure
+*/
+
+/* Structure CSS - Rose Pine Theme Extensions */
+
+/******************* cool-list toc *****************************/
+
+/* A rounded item list with Rose Pine theme colors for table of contents.
+   Inspired from: https://catalin.red/css3-ordered-list-styles/
+
+   Use: list must be ordered list, items must include an element (anchor, emphasis...)
+
+   ## cool-list toc
+   <!-- _class: cool-list toc -->
+
+   1. *One*
+   1. *Two*
+       1. *Three*
+       1. *Four*
+   1. *Five*
+*/
+
+section.cool-list.toc {
+    background-color: var(--base, #232136);
+    color: var(--text, #e0def4);
+}
+
+section.cool-list.toc ol {
+    counter-reset: li;
+    list-style: none;
+    padding: 0px 0 0 1.5em;
+    overflow: hidden;
+    align-items: center;
+    justify-items: start;
+    justify-content: start;
+    align-content: center;
+}
+
+section.cool-list.toc li {
+    margin-bottom: 0.2em !important;
+    margin-top: 0.2em !important;
+}
+
+section.cool-list.toc ol > li > em, 
+section.cool-list.toc ol > li > a {
+    position: relative;
+    display: block;
+    padding: .3em .3em .3em 1.8em;
+    margin: .2em 0;
+    background: var(--surface, #2a273f);
+    color: var(--text, #e0def4);
+    text-decoration: none;
+    border-radius: .3em;
+    transition: all .3s ease-out;
+    font-style: normal;
+    font-weight: 500;
+    border: 1px solid var(--highlight-low, #2a283e);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 0.85em;
+    line-height: 1.2;
+}
+
+section.cool-list.toc ol > li > em:before, 
+section.cool-list.toc ol > li > a:before {
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -1em;
+    top: 50%;
+    margin-top: -1em;
+    background: var(--rose, #ea9a97);
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border: .1em solid var(--base, #232136);
+    text-align: center;
+    font-weight: bold;
+    border-radius: 50%;
+    transition: all .3s ease-out;
+    color: var(--base, #232136);
+    font-size: 0.8em;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+section.cool-list.toc ol > li > em:hover, 
+section.cool-list.toc ol > li > a:hover {
+    background: var(--overlay, #393552);
+    color: var(--text, #e0def4);
+    font-weight: 600;
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+section.cool-list.toc ol > li > em:hover:before,
+section.cool-list.toc ol > li > a:hover:before {
+    background: var(--love, #eb6f92);
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Lists inside lists */
+section.cool-list.toc ol ol {
+    margin: 0.2em 0 0.2em 1.5em; /* Add some left margin for inner lists */
+    font-size: 75%;
+    counter-reset: li2; /* Initiate a counter */
+    display: block; /* Override grid for nested lists */
+    gap: 0.3em;
+}
+
+section.cool-list.toc ol ol > li > em:before,
+section.cool-list.toc ol ol > li > a:before {
+    content: counter(li2);
+    counter-increment: li2;
+    background: var(--foam, #9ccfd8);
+    color: var(--base, #232136);
+    height: 1.6em;
+    width: 1.6em;
+    line-height: 1.6em;
+    left: -0.9em;
+    margin-top: -0.8em;
+    font-size: 0.7em;
+}
+
+section.cool-list.toc ol ol > li > em {
+    background: var(--highlight-low, #2a283e);
+    padding: .2em .2em .2em 1.5em;
+    margin: .15em 0;
+    font-size: 0.8em;
+}
+
+section.cool-list.toc ol ol > li > em:hover {
+    background: var(--highlight-muted, #44415a);
+}
+
+section.cool-list.toc ol ol > li > em:hover:before {
+    background: var(--iris, #c4a7e7);
+}
+
+/* Third level lists */
+section.cool-list.toc ol > li > ul {
+    list-style-type: disc;
+    margin: 0 0 0 1.5em;
+    font-size: 75%;
+    color: var(--subtle, #908caa);
+}
+
+section.cool-list.toc h2 {
+    color: var(--foam, #9ccfd8);
+    margin-bottom: 1em;
+    font-size: 1.8em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    section.cool-list.toc ol {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 0.5em;
+    }
+}
+
+@media (max-width: 900px) {
+    section.cool-list.toc ol {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 0.4em;
+        max-height: 80vh;
+    }
+    
+    section.cool-list.toc ol > li > em, 
+    section.cool-list.toc ol > li > a {
+        padding: .25em .25em .25em 1.6em;
+        font-size: 0.8em;
+        margin: .15em 0;
+    }
+    
+    section.cool-list.toc ol > li > em:before, 
+    section.cool-list.toc ol > li > a:before {
+        height: 1.8em;
+        width: 1.8em;
+        line-height: 1.8em;
+        left: -0.9em;
+        margin-top: -0.9em;
+        font-size: 0.75em;
+    }
+}
+
+@media (max-width: 600px) {
+    section.cool-list.toc ol {
+        grid-template-columns: 1fr;
+        gap: 0.3em;
+        max-height: 85vh;
+        padding: 0 0 0 1.2em;
+    }
+    
+    section.cool-list.toc ol > li > em, 
+    section.cool-list.toc ol > li > a {
+        padding: .2em .2em .2em 1.4em;
+        font-size: 0.75em;
+        margin: .1em 0;
+    }
+    
+    section.cool-list.toc ol > li > em:before, 
+    section.cool-list.toc ol > li > a:before {
+        height: 1.6em;
+        width: 1.6em;
+        line-height: 1.6em;
+        left: -0.8em;
+        margin-top: -0.8em;
+        font-size: 0.7em;
+    }
+}
+
+/******************* lead *****************************/
+
+/* Lead slide with decorative background and centered title
+   Use: Add <!-- _class: lead --> to create a title slide
+   
+   ## Lead Slide
+   <!-- _class: lead -->
+   
+   # Your Title Here
+*/
+
+section.lead {
+    background-color: var(--base, #232136);
+    background-image: url('themes/actsis/patron1.svg');
+    background-size: inherit;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2em;
+    position: relative;
+    overflow: hidden;
+}
+
+section.lead h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    margin: 0;
+    padding: 0.8em 1.2em;
+    background: transparent;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    max-width: 80%;
+    text-align: center;
+}
+
+/* Hide the top-right logo/icon in lead slides */
+section.lead::before {
+    display: none !important;
+}
+
+@keyframes borderGlow {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.9;
+        transform: scale(1.02);
+    }
+}
+
+/* Responsive adjustments for lead */
+@media (max-width: 980px) {
+    section.lead h1 {
+        font-size: 3em;
+        max-width: 90%;
+        padding: 0.7em 1em;
+    }
+}
+
+@media (max-width: 640px) {
+    section.lead h1 {
+        font-size: 2.5em;
+        max-width: 95%;
+        padding: 0.6em 0.8em;
+    }
+}
