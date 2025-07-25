@@ -15,16 +15,20 @@
 :root {
     /* ACTSIS Color Palette */
     --base: #000000;
+    --base-down: #faf4ed;
     --surface: #1a1a1a;
     --overlay: #2a2a2a;
     --muted: #666666;
     --subtle: #888888;
     --text: #ffffff;
+    --text-down: #575279;
     --love: #ff6b6b;
+    --love-down: #b4637a;
     --gold: #ffd93d;
     --rose: #ff8a95;
     --pine: #6bcf7f;
     --foam: #4ecdc4;
+    --foam-down: #56949f;
     --iris: #a8e6cf;
     --highlight-low: #1a1a1a;
     --highlight-muted: #333333;
@@ -187,13 +191,18 @@ section.lead::before {
 /* Logo ACTSIS por defecto */
 section::before {
     content: "";
-    width: 8%;
+    width: 2%;
     height: 8%;
     position: absolute;
-    right: 215%;
+    right: 2.5%;
     top: 2%;
     background: url('./themes/actsis/logo-actsis.svg') no-repeat center/contain;
     filter: brightness(0) invert(1);
+}
+
+/* Logo oscuro para modo split invertido (lado claro a la derecha) */
+section.split-columns.inverted::before {
+    filter: brightness(0);
 }
 
 /* ===== ACTSIS First Slide ===== */

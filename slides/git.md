@@ -174,6 +174,145 @@ marp-pre {
 
 ---
 
+<!-- _class: lead -->
+
+# Split Columns Component
+
+Ejemplo de uso del nuevo componente de dos columnas
+
+---
+
+<!-- _class: split-columns -->
+
+<div class="left-content">
+
+# Columna Izquierda
+## Fondo Blanco
+
+- Contenido para la columna izquierda
+- Texto oscuro sobre fondo claro
+- Perfecto para contenido principal
+
+```javascript
+const leftColumn = {
+  background: 'white',
+  color: 'dark'
+};
+```
+
+</div>
+
+<div class="right-content">
+
+# Columna Derecha
+## Fondo Oscuro
+
+- Contenido para la columna derecha
+- Texto claro sobre fondo oscuro
+- Ideal para código o información secundaria
+
+```css
+.right-content {
+  background: var(--surface);
+  color: var(--text);
+}
+```
+
+</div>
+
+---
+
+<!-- _class: split-columns inverted -->
+
+<div class="left-content">
+
+# Columna Izquierda Invertida
+## Ahora Oscura
+
+- Los colores están invertidos
+- Fondo oscuro en la izquierda
+- Texto claro sobre fondo oscuro
+
+### Características:
+- Flexibilidad total
+- Colores del tema Rose Pine Moon
+- Responsive design
+
+</div>
+
+<div class="right-content">
+
+# Columna Derecha Invertida
+## Ahora Clara
+
+- Fondo claro en la derecha
+- Texto oscuro sobre fondo claro
+- Perfecto contraste visual
+
+### Uso:
+```markdown
+<!-- _class: split-columns inverted -->
+
+<div class="left-content">
+Contenido izquierdo
+</div>
+
+<div class="right-content">
+Contenido derecho
+</div>
+```
+
+</div>
+
+---
+
+<!-- _class: split-columns -->
+
+<div class="left-content">
+
+# Responsive Design
+
+## En pantallas grandes:
+- Dos columnas lado a lado
+- 50% del ancho cada una
+- Altura completa de la pantalla
+
+## En pantallas medianas (≤980px):
+- Columnas apiladas verticalmente
+- Altura mínima de 50vh cada una
+- Bordes horizontales en lugar de verticales
+
+</div>
+
+<div class="right-content">
+
+# Características Técnicas
+
+## Colores Rose Pine Moon:
+- **Base**: `#232136`
+- **Surface**: `#2a273f`
+- **Text**: `#e0def4`
+- **Rose**: `#ea9a97`
+- **Foam**: `#9ccfd8`
+- **Iris**: `#c4a7e7`
+
+## Tipografía optimizada:
+- H1: 2.5em, color rose
+- H2: 2em, color foam
+- H3: 1.5em, color iris
+
+</div>
+
+---
+
+<!-- _class: lead -->
+
+# ¡Componente Listo!
+
+Usa `split-columns` para crear layouts de dos columnas con el tema Rose Pine Moon
+
+---
+
 ## Test code block color
 
 Pythong
