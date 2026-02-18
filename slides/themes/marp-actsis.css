@@ -101,10 +101,10 @@ text {
     color: var(--text);
 }
 ul {
-    color: var(--subtle);
+    color: var(--text);
 }
 li {
-    color: var(--subtle);
+    color: var(--text);
 }
 img {
     background-color: var(--highlight-low);

@@ -82,16 +82,16 @@ text {
   color: var(--text);
 }
 ul {
-  color: var(--subtle);
+  color: var(--text);
 }
 li {
-  color: var(--subtle);
+  color: var(--text);
 }
 img {
   background-color: var(--highlight-low);
 }
 strong {
-  color: var(--muted);
+  color: var(--text);
   font-weight: inherit;
   font-weight: 800;
 }
