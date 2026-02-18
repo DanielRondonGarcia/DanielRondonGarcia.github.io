@@ -23,6 +23,12 @@ const Resume = () => {
 
           <Timeline title="Education">
             <TimelineItem
+              title="DIPLOMADO HERRAMIENTA DE VISUALIZACIÓN DE DATA - POWER BI"
+              period="2025"
+              location="Instituto Técnico Laboral Cajasan, Bucaramanga (Colombia)">
+              <p>Duración: 100 horas. <a href="/certificates/Diplomado_Power_BI_DRONDON.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Ver Certificado</a></p>
+            </TimelineItem>
+            <TimelineItem
               title="MAESTRÍA OFICIAL EN CIBERSEGURIDAD"
               period="2024 - Present"
               location="Universidad Internacional de Valencia, España">
