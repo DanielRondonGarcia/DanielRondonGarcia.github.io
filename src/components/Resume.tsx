@@ -12,7 +12,7 @@ const Resume = () => {
         <div className="col-span-12 lg:col-span-6">
 
           <Timeline title="Summary">
-            <TimelineItem title={process.env.NEXT_PUBLIC_NAME || 'RIKAM PALKAR'}>
+            <TimelineItem title={typeof process.env.NEXT_PUBLIC_NAME === 'string' ? process.env.NEXT_PUBLIC_NAME.replace(/"/g, '').trim() : 'RIKAM PALKAR'}>
               <p className="mb-4">DevOps and SRE with +3 years in CI/CD, automation, and vulnerability detection. Studying a master's in Cybersecurity. Collaborate in agile teams, passionate about efficiency, with QA experience and focus on continuous improvement.</p>
               <ul className="list-disc list-inside">
                 <li>Bucaramanga, CO</li>

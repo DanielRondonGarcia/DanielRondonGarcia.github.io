@@ -67,7 +67,7 @@ export default function Header({ activeSection, setActiveSection, isScrolled }: 
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold">
               {activeSection !== 'home' && (
-                <button onClick={() => setActiveSection('home')} className="hover:text-[var(--primary-color)] transition-colors">{process.env.NEXT_PUBLIC_NAME}</button>
+                <button onClick={() => setActiveSection('home')} className="hover:text-[var(--primary-color)] transition-colors">{typeof process.env.NEXT_PUBLIC_NAME === 'string' ? process.env.NEXT_PUBLIC_NAME.replace(/"/g, '').trim() : 'Your Name'}</button>
               )}
             </div>
             

@@ -29,7 +29,7 @@ export default function About() {
           <div className="flex justify-center">
             <Image
               src={gravatarUrl}
-              alt={process.env.NEXT_PUBLIC_NAME || 'Profile Picture'}
+              alt={typeof process.env.NEXT_PUBLIC_NAME === 'string' ? process.env.NEXT_PUBLIC_NAME.replace(/"/g, '').trim() : 'Profile Picture'}
               width={300}
               height={300}
               className="rounded-full object-cover"

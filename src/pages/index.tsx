@@ -36,13 +36,23 @@ export default function Home() {
     }
   }, [router.asPath])
 
+  // Obtener el nombre correctamente del environment
+  const getName = () => {
+    const name = process.env.NEXT_PUBLIC_NAME
+    if (typeof name === 'string') {
+      return name.replace(/"/g, '').trim()
+    }
+    return 'Portfolio'
+  }
+
+  const name = getName()
+
   return (
     <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-black text-gray-900 dark:text-white relative overflow-hidden">
       <Head>
-        <title>{process.env.NEXT_PUBLIC_NAME} - Portfolio</title>
-        <meta name="description" content={`${process.env.NEXT_PUBLIC_NAME}'s portfolio`} />
+        <title>{`${name} - Portfolio`}</title>
+        <meta name="description" content={`${name}'s portfolio`} />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
       </Head>
 
       <div className="absolute inset-0 bg-[url('/curved-lines.svg')] bg-no-repeat bg-cover text-black dark:text-white opacity-20"></div>

@@ -1,7 +1,7 @@
 export default function Introduction() {
   return (
     <section className="mb-8">
-      <h1 className="text-6xl font-bold mb-4">{process.env.NEXT_PUBLIC_NAME}</h1>
+      <h1 className="text-6xl font-bold mb-4">{typeof process.env.NEXT_PUBLIC_NAME === 'string' ? process.env.NEXT_PUBLIC_NAME.replace(/"/g, '').trim() : 'Your Name'}</h1>
       <p className="text-xl mb-4">
         I'm a passionate system engineer,<br />
         and an automation virtuoso, weaving security into every pipeline,
