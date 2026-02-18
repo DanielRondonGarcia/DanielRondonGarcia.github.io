@@ -7,6 +7,7 @@ export interface PresentationConfig {
   category: string;
   description?: string;
   tags?: string[];
+  image?: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -21,8 +22,17 @@ export const presentations: PresentationConfig[] = [
     tags: ['devops', 'SCM', 'versionamiento'],
     createdAt: '2025-07-24',
     updatedAt: '2024-07-25'
+  },
+  {
+    id: 'afinia_monitoring',
+    title: 'AFINIA — Día 4: Configuración de Monitoreo',
+    category: 'MONITORING',
+    description: 'Configuración de Monitoreo (Infra de Pruebas de Estrés)',
+    tags: ['monitoring', 'grafana', 'influxdb', 'kubernetes', 'sre'],
+    image: '/images/devops-presentation.svg', // Placeholder image
+    createdAt: '2026-02-18',
+    updatedAt: '2026-02-18'
   }
-  // Agregar más presentaciones aquí...
 ];
 
 // Función para obtener todas las presentaciones
@@ -46,8 +56,9 @@ export const getPresentationUrl = (id: string): string => {
 };
 
 // Función para generar la URL de la imagen de la presentación
-export const getPresentationImageUrl = (id: string): string => {
-  return `/images/${id}.png`;
+export const getPresentationImageUrl = (presentation: PresentationConfig): string => {
+  if (presentation.image) return presentation.image;
+  return `/images/${presentation.id}.png`;
 };
 
 // Función para convertir presentaciones a formato Article
@@ -55,7 +66,7 @@ export const presentationsToArticles = () => {
   return presentations.map(presentation => ({
     title: presentation.title,
     category: presentation.category,
-    image: getPresentationImageUrl(presentation.id),
+    image: getPresentationImageUrl(presentation),
     link: getPresentationUrl(presentation.id),
     type: 'presentation' as const,
     description: presentation.description,

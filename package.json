@@ -10,10 +10,10 @@
     "slides:build": "npm run slides:html && npm run slides:images && npm run slides:assets",
     "slides:html": "npx marp --theme-set slides/themes --html --allow-local-files --bespoke.progress true --bespoke.transition -I slides -o public/slides",
     "slides:images": "npx marp --theme-set slides/themes --image png -I slides -o public/images",
-    "slides:assets": "mkdir -p public/slides/images public/slides/themes && cp -r slides/images/* public/slides/images/ 2>/dev/null || true && cp -r slides/themes/* public/slides/themes/ 2>/dev/null || true && cp slides/whiteboard.js public/slides/ 2>/dev/null || true",
+    "slides:assets": "node scripts/copy-assets.js",
     "slides:serve": "npx marp -I slides -w -s --theme-set slides/themes",
-    "slides:clean": "rm -f public/slides/*.html public/images/*.png public/slides/whiteboard.js 2>/dev/null || true && rm -rf public/slides/images public/slides/themes 2>/dev/null || true",
-    "slides:list": "ls public/slides/*.html 2>/dev/null || echo 'No hay archivos HTML' && ls public/images/*.png 2>/dev/null || echo 'No hay imágenes PNG'",
+    "slides:clean": "node scripts/clean-slides.js",
+    "slides:list": "node scripts/list-slides.js",
     "build:all": "npm run slides:build && npm run build"
   },
   "dependencies": {
