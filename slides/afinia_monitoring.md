@@ -486,3 +486,10 @@ Y finalmente, su aprobación para usar este sistema como el juez imparcial de nu
 Muchas gracias.
 ¿Tienen alguna pregunta sobre la estrategia de monitoreo antes de pasar a la demostración en vivo?
 -->
+
+---
+
+# Anexo
+
+- Dashboard de nodos IIS y Oracle (snapshot): https://grafana.actsis.net/dashboard/snapshot/SelT94Vfmr3AccrQS0U8IgIcJoxti5gw
+- Referencia general de Grafana y sus componentes (Artemis): https://docs.actsis.com/docs/artemis/
