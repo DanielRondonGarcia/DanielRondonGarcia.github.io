@@ -65,4 +65,17 @@ try {
   console.error('Error copying whiteboard.js:', err);
 }
 
+try {
+  const srcMermaid = path.join('slides', 'mermaid-viewer.js');
+  const destMermaid = path.join('public', 'slides', 'mermaid-viewer.js');
+  if (fs.existsSync(srcMermaid)) {
+    console.log(`Copying ${srcMermaid} to ${destMermaid}...`);
+    fs.copyFileSync(srcMermaid, destMermaid);
+  } else {
+    console.log('mermaid-viewer.js not found, skipping.');
+  }
+} catch (err) {
+  console.error('Error copying mermaid-viewer.js:', err);
+}
+
 console.log('Asset copy complete.');

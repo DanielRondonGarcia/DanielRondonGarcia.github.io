@@ -206,7 +206,75 @@ Alcance: App web, base de datos Oracle 19c, inyectores JMeter/K6, infraestructur
 Alinear métricas con criterios de aceptación del Comité Evaluador.
 -->
 
-<!-- TODO: Insertar captura aquí: Agenda oficial resaltada en “Día 4” -->
+<!--
+Buenos días a todos. Hoy nos centraremos en el cuarto día de nuestra agenda: la Configuración de Monitoreo.
+Nuestro objetivo principal es asegurar una visibilidad completa de extremo a extremo, desde la aplicación web hasta la base de datos Oracle.
+Validaremos que las métricas se capturen correctamente y buscaremos su aprobación para que el monitoreo sea el insumo oficial de evaluación.
+-->
+
+---
+
+# Agenda día 4
+
+<!-- _class: cool-list toc -->
+
+1. [Definir métricas a observar (rendimiento, recursos, errores)](#3)
+1. [Confirmar herramientas de monitoreo/APM disponibles](#3)
+1. [Acordar visibilidad de dashboards para el equipo evaluador](#3)
+1. [Configurar monitoreo de aplicación, base de datos e infraestructura](#4)
+1. [Habilitar dashboards y alertas](#8)
+1. [Validar que las métricas se capturan correctamente](#10)
+1. [Confirmar que el monitoreo queda activo y estable](#10)
+1. [Congelar configuración para evitar ajustes durante las pruebas](#10)
+
+<!--
+Esta es la agenda detallada para hoy.
+Comenzaremos definiendo qué métricas son críticas para nosotros.
+Luego, confirmaremos que nuestras herramientas (APM, dashboards) están listas y disponibles.
+Un punto clave es acordar qué verán los evaluadores en tiempo real.
+Procederemos a configurar y habilitar todo el stack de monitoreo.
+Finalmente, validaremos la captura de datos y congelaremos la configuración para garantizar estabilidad durante las pruebas de estrés.
+-->
+
+---
+
+<!-- _class: split-columns inverted -->
+
+<div class="left-content">
+
+# Herramientas
+
+## Stack de Observabilidad
+
+- **InfluxDB**: Almacenamiento de métricas.
+- **Grafana**: Visualización y Dashboards.
+- **Loki**: Centralización de logs.
+- **Oracle Exporter**: Métricas de Base de Datos.
+
+</div>
+
+<div class="right-content">
+
+# Métricas Clave
+
+## Visibilidad
+
+- **Rendimiento**: Latencia, Throughput (TPS).
+- **Recursos**: CPU, Memoria, IOPS.
+- **Errores**: Tasas de error HTTP/DB, bloqueos.
+
+<div class="highlight-callout">
+Dashboards visibles para el equipo evaluador
+</div>
+
+</div>
+
+<!--
+En esta diapositiva contrastamos nuestras herramientas con lo que necesitamos ver.
+A la izquierda, nuestro stack técnico ya desplegado: InfluxDB para series de tiempo, Grafana para visualización, Loki para logs y el exportador específico de Oracle.
+A la derecha, lo que realmente importa al negocio y a la evaluación: Rendimiento (latencia y RPS), uso de recursos y tasas de error.
+El objetivo es que la tecnología de la izquierda nos entregue la visibilidad de la derecha.
+-->
 
 ---
 
@@ -216,6 +284,10 @@ Alinear métricas con criterios de aceptación del Comité Evaluador.
 - **Componentes**: Orquestador (Python), Jobs (JMeter/K6), InfluxDB, Grafana.
 - **Target**: `demoafinia.actsis.com` (149.130.186.237).
 
+---
+
+# Diagrama de Arquitectura
+
 ```mermaid
 graph TD
     subgraph "Control Plane"
@@ -223,32 +295,54 @@ graph TD
         Plan[stress-plan.json] --> Orchestrator
     end
 
-    subgraph "Kubernetes Cluster"
+    subgraph "Kubernetes Cluster (Generadores de Carga)"
         direction TB
-        JMeter[JMeter Pods] -->|HTTP/JDBC| LB1[Load Balancer]
-        K6[K6 Browser Pods] -->|Chrome Protocol| LB1
-        JMeter -->|Logs| Loki[(Loki)]
-        K6 -->|Logs| Loki
+        subgraph "Namespace: default"
+            JMeter["JMeter Pods<br/>(Protocolo/API)"]
+            JMeterPromtail["Promtail<br/>(JMeter Logs)"]
+            K6["K6 Browser Pods<br/>(Simulación Usuario Real)"]
+            K6Promtail["Promtail<br/>(K6 Logs)"]
+
+            JMeter -->|HTTP/JDBC| LB1[Load Balancer / WAF]
+            K6 -->|Chrome Protocol| LB1
+            %% Logs hacia promtail
+            JMeter -->|Logs| JMeterPromtail
+            K6 -->|Logs| K6Promtail
+            %% promtail hacia Loki
+            JMeterPromtail -->|Push Logs| Loki[(Loki)]
+            K6Promtail -->|Push Logs| Loki
+        end
     end
 
     subgraph "Target System (Afinia)"
-        LB1 --> LB[demoafinia.actsis.com]
-        LB --> WebSrv[Servidores Web]
-        WebSrv --> DB[Oracle DB]
+        LB["demoafinia.actsis.com<br/>149.130.186.237"] --> WebSrv[Servidores Web]
+        WebSrv --> DB[Base de Datos Oracle]
     end
 
     subgraph "Observabilidad"
-        JMeter -->|Metrics| InfluxDB[(InfluxDB)]
-        K6 -->|Metrics| InfluxDB
-        OracleExp[Oracle Exporter] -->|Metrics| InfluxDB
-        InfluxDB --> Grafana[Grafana]
-        Loki --> Grafana
+        InfluxDB[(InfluxDB)]
+        Grafana[Grafana Dashboards]
+        OracleExp[Oracle Exporter]
+
+        JMeter -->|Write Metrics| InfluxDB
+        K6 -->|Write Metrics| InfluxDB
+        OracleExp -->|Scrape| DB
+        OracleExp -->|Write Metrics| InfluxDB
+        InfluxDB --> Grafana
+        Loki -->|Logs| Grafana
     end
+
+    LB1 --> LB
 ```
 
 <!--
-Aclarar namespaces, políticas DNS y límites de recursos.
-Orquestador Central (Python) interpreta el plan de pruebas y despliega Jobs.
+Aquí vemos la topología completa.
+El orquestador en Python despliega los trabajos en Kubernetes.
+Tenemos dos tipos de generadores de carga: JMeter para protocolo y K6 para navegador, ambos atacando al balanceador de carga de Afinia.
+Lo más importante para hoy es la parte inferior: el subsistema de Observabilidad.
+Noten cómo todos los componentes reportan a InfluxDB y Loki, centralizando la verdad en Grafana.
+Además, el Oracle Exporter nos da una visión profunda de la base de datos, complementando las métricas de aplicación.
+Esta arquitectura nos permite correlacionar la carga inyectada (arriba) con el impacto en el sistema (abajo).
 -->
 
 ---
@@ -256,71 +350,58 @@ Orquestador Central (Python) interpreta el plan de pruebas y despliega Jobs.
 # Orquestación y Plan de Prueba
 
 - **Archivo**: `stress-plan.json` define fases (inicio, calentamiento, ramp-up).
-- **Escalado**: Progresivo de 0 a 40+ usuarios concurrentes.
+- **Escalado**: Progresivo según el plan de prueba.
 - **Datos**: Distribución por índice (`CLIENTE_ID`).
 
-<!-- TODO: Insertar captura aquí: snippet de stress-plan.json y stress-orchestrator.py -->
+La distribución de los usuarios/clientes en tus pruebas de K6 se realiza mediante una **lógica de asignación cíclica (Round Robin)** basada en el ID del usuario virtual (VU).
+
+| Archivo JSON | Cantidad de Datos | Script que lo usa |
+| :--- | :--- | :--- |
+| **`Estrato_0_1634.json`** | **1,634** clientes | **`proOrden.js`** |
+| **`Estrato_4_1130.json`** | **1,130** clientes | **`updUsu.js`** |
 
 <!--
-El script stress-orchestrator.py gestiona las fases.
-Persistencia: Inyectores K6 usan volumen compartido o config en memoria para CLIENTE_ID.json.
+El plan de pruebas no es improvisado; está definido en un JSON estricto.
+La lógica de distribución de datos es fundamental: usamos Round Robin basado en el ID del VU.
+Esto garantiza que cada hilo virtual tenga un cliente único asignado.
+Por ejemplo, si lanzamos 10 VUs, cada uno tomará un cliente distinto del archivo JSON cargado en memoria compartida.
+Si escalamos más allá de la cantidad de datos (ej. más de 1634 VUs para estrato 0), la asignación dará la vuelta de forma segura.
 -->
 
 ---
 
-# Generadores de Carga: JMeter (Protocolo)
+# Generadores de Carga: Recursos por Pod
 
-Pruebas de alto rendimiento a nivel de API y Base de Datos (JDBC).
-
-| Variable | Valor |
-| :--- | :--- |
-| **Imagen** | `danielrondongarcia/jmeter-stress:latest` |
-| **Despliegue** | Kubernetes Job (Indexed) |
-| **CPU** | 500m / 1000m (1 Core) |
-| **RAM** | 1Gi / 4Gi |
-| **DNS** | Custom HostAlias (`demoafinia` -> `149.130.186.237`) |
-
-<!-- TODO: Insertar captura aquí: Pod JMeter en Kubernetes + métricas de throughput -->
+| Tipo | Herramienta | Solicitud (Requests) | Límite (Limits) |
+| :--- | :--- | :--- | :--- |
+| **Estándar JMeter** | JMeter | **CPU:** 0.5 vCPU<br>**RAM:** 1 GiB | **CPU:** 0.66 vCPU<br>**RAM:** 4 GiB |
+| **Estándar K6** | K6 | **CPU:** 0.5 vCPU<br>**RAM:** 1 GiB | **CPU:** 2 vCPU<br>**RAM:** 4 GiB |
+| **proOrden** | K6 | **CPU:** 0.5 vCPU<br>**RAM:** 1 GiB | **CPU:** 2 vCPU<br>**RAM:** 4 GiB |
+| **liqCiclo9** | JMeter | **CPU:** 0.25 vCPU<br>**RAM:** 512 MiB | **CPU:** 0.5 vCPU<br>**RAM:** 1 GiB |
 
 <!--
-Política DNS: None (Nameservers: 192.168.25.201, 8.8.8.8).
-Colección de métricas a InfluxDB; logs -> Promtail.
--->
-
----
-
-# Generadores de Carga: K6 (Browser)
-
-Simulación de experiencia de usuario real (End-to-End) con Chromium.
-
-| Variable | Valor |
-| :--- | :--- |
-| **Imagen** | `danielrondongarcia/k6-stress:latest` |
-| **CPU** | 7000m (7 Cores dedicados) |
-| **RAM** | 10Gi |
-| **Navegador** | Chromium (Headless) |
-| **Shm Size** | Host IPC / Configurado para evitar crash |
-
-<!-- TODO: Insertar captura aquí: Panel de VUs y tiempos de respuesta de K6 en Grafana -->
-
-<!--
-Requieren mayor capacidad de cómputo por renderización.
-Lectura de CLIENTE_ID.json por pod para evitar data overlap.
+Esta tabla resume la asignación de recursos en Kubernetes definida en el stress-plan.json.
+Es crucial entender la diferencia entre Request y Limit:
+Request es lo que el cluster garantiza para iniciar el pod.
+Limit es el techo máximo; si un pod de JMeter intenta usar más de 4GB de RAM, será reiniciado (OOMKilled) para proteger el nodo.
+Hemos dimensionado K6 con más CPU (hasta 2 vCPU) porque la simulación de navegador es intensiva en procesamiento.
 -->
 
 ---
 
 # Observabilidad: InfluxDB y Grafana
 
-- **InfluxDB v2**: Org `AFINIA`, Bucket `dev`.
+- **InfluxDB v2**: Org `AFINIA`, Bucket nombrado según la prueba (ej. `updUsu`, `proOrden`, etc.).  
 - **Grafana**: Dashboards de VUs, latencia, error rate, recursos.
 - **Acceso**: Organización y usuario creados para AFINIA (acceso en vivo).
 
 <!-- TODO: Insertar captura aquí: Dashboard principal y variables en Grafana -->
 
 <!--
-Mapear paneles a queries (measurement, tags, fields).
-Repositorio de métricas: Almacenamiento de series temporales.
+Nuestra ventana a la realidad es Grafana.
+Hemos configurado InfluxDB v2 como backend.
+Hemos creado usuarios específicos para que el equipo de AFINIA pueda entrar y ver los tableros en tiempo real durante la prueba.
+No hay cajas negras aquí.
 -->
 
 ---
@@ -337,113 +418,78 @@ Repositorio de métricas: Almacenamiento de series temporales.
 <!-- TODO: Insertar captura aquí: Loki (filtros por job/pod) y panel de Oracle en Grafana -->
 
 <!--
-Retención y etiquetas (job, namespace, pod, nivel).
-Monitorización de bloqueos y esperas es crítica.
+Para análisis de causa raíz, necesitamos logs y métricas profundas de base de datos.
+Loki nos permite filtrar logs por pod o trabajo específico.
+Y el Oracle Exporter está tuneado para extraer métricas vitales como sesiones activas, métricas del sistema y clases de espera, cruciales para detectar bloqueos en la base de datos.
 -->
 
 ---
 
-# Arquitectura SaaS: Perímetro y Accesos
+# Configuración y Estabilidad
 
-**Objetivo**: Mostrar quién entra y por dónde.
+<!-- _class: lead -->
 
-- **Oracle Cloud (Bogotá)**: VCN aislada para seguridad.
-- **Accesos**:
-  1. **Público**: Usuarios externos vía Internet.
-  2. **Corporativo (Afinia)**: VPN segura para administradores.
-- **Subred Pública**:
-  - **WAF**: Filtra ataques.
-  - **Load Balancer**: Único punto visible, distribuye tráfico.
+---
 
-<!-- TODO: Insertar captura aquí: Diagrama de perímetro -->
+<!-- _class: split-columns inverted -->
+
+<div class="left-content">
+
+# Validación de Captura
+
+- **Métricas**: Verificación de flujo InfluxDB -> Grafana.
+- **Logs**: Verificación de flujo Promtail -> Loki.
+- **Alertas**: Umbrales configurados para latencia y errores.
+
+</div>
+
+<div class="right-content">
+
+## Congelamiento
+
+- **Configuración**: Se congela la configuración para evitar ajustes durante las pruebas.
+- **Monitoreo**: Activo y estable.
+- **Aprobación**: Insumo válido para evaluación.
+
+<div class="highlight-callout">
+Q: ¿Qué pasa si necesitamos cambiar la configuración de monitoreo durante la prueba?
+</div>
+
+</div>
 
 <!--
-Políticas WAF; reglas LB y Health Checks.
-Aquí no viven los datos, solo los guardianes.
+Antes de proceder, validamos que los datos fluyan correctamente de extremo a extremo.
+Una vez validado, entramos en estado de "Congelamiento".
+Esto significa que no moveremos más configuraciones de monitoreo durante la prueba para asegurar que los datos sean consistentes y comparables.
 -->
 
 ---
 
-# Capa de Aplicación (Alta Disponibilidad)
+# Entregables y Evidencias
 
-**Objetivo**: Procesamiento y resiliencia.
-
-- **Subred Privada Web**: Servidores de aplicación.
-- **AutoScaling**: Grupo de servidores que crece/decrece según demanda.
-- **Fault Domains**: Distribución en 3 zonas físicas distintas.
-- **Seguridad**: Nadie entra directo desde internet, solo el Balanceador.
-
-<!-- TODO: Insertar captura aquí: Gráfico de ASG/instances y health -->
+<!-- _class: lead -->
 
 <!--
-Políticas de scaling y límites.
-Si falla un rack físico, los otros dos siguen operando.
+Finalmente, revisemos qué entregamos hoy y qué evidencias dejamos.
 -->
 
 ---
 
-# Capa de Datos (Backend)
+# Validación de Visibilidad
 
-**Objetivo**: Dónde reside la información sensible.
-
-- **Subred Privada de Datos**: Nodos de procesamiento y Base de Datos.
-- **Aislamiento**: Zona completamente aislada.
-- **Acceso**: Solo los servidores web pueden hablar con la BD.
-
-<!-- TODO: Insertar captura aquí: Diagrama de seguridad/NSG/SG -->
-
-<!--
-Endpoints y reglas de conectividad.
-Garantiza máxima seguridad para la información del negocio.
--->
-
----
-
-# Salida y Servicios Auxiliares
-
-**Objetivo**: Actualizaciones y almacenamiento seguro.
-
-- **NAT Gateway**: Salida a internet para actualizaciones (sin entrada).
-- **Service Gateway**: Conexión privada a Object Storage.
-- **Ecosistema**: Arquitectura completa, segura, escalable y redundante.
-
-<!-- TODO: Insertar captura aquí: Diagrama completo con flujos -->
-
-<!--
-Backups/artefactos en Object Storage.
-Sin salir nunca a la internet pública.
--->
-
----
-
-# Validación de Monitoreo y Checklist
-
-- **Visibilidad**: Métricas en Grafana y retención en InfluxDB/Loki.
-- **Alertas**: Latencia, Error Rate, CPU/RAM, Waits DB.
-- **Aprobación**: Monitoreo como insumo válido para evaluación.
-
-<!-- TODO: Insertar captura aquí: Grafana (latencia p95/p99), Loki, InfluxDB -->
-
-<!--
-Criterios de aceptación y evidencias.
-Confirmar que el monitoreo es completo y estable.
--->
-
----
-
-# Evidencias y Próximos Pasos
-
-- **Evidencias**: Capturas de dashboards, consultas, logs.
-- **Pendientes**:
-  - Umbrales finales.
-  - Ventanas de prueba.
-  - Acceso VPN si aplica.
+1. **Dashboards configurados**: Paneles operativos y accesibles.
+2. **Evidencia de métricas visibles**: Capturas y demostración en vivo.
+3. **Descripción de herramientas**: Alcances definidos.
+4. **Aprobación**: Monitoreo validado por el comité.
 
 <!-- TODO: Insertar captura aquí: Tabla de hallazgos/acciones -->
 
 <!--
-Fechas y responsables.
-Confirmar ajustes menores según las pruebas.
+Estos son nuestros criterios de éxito para hoy.
+Dashboards operativos.
+Evidencia visual de que funcionan.
+Claridad en el alcance de las herramientas.
+Y finalmente, su aprobación para usar este sistema como el juez imparcial de nuestras pruebas de rendimiento.
 -->
 
 ---
@@ -452,3 +498,8 @@ Confirmar ajustes menores según las pruebas.
 
 Daniel G. Rondón García
 <daniel.rondon@actsis.com>
+
+<!--
+Muchas gracias.
+¿Tienen alguna pregunta sobre la estrategia de monitoreo antes de pasar a la demostración en vivo?
+-->

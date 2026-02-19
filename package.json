@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "slides:build": "npm run slides:html && npm run slides:images && npm run slides:assets",
+    "slides:build": "npm run slides:html && node scripts/inject-mermaid.js && npm run slides:images && npm run slides:assets",
     "slides:html": "npx marp --theme-set slides/themes --html --allow-local-files --bespoke.progress true --bespoke.transition -I slides -o public/slides",
     "slides:images": "npx marp --theme-set slides/themes --image png -I slides -o public/images",
     "slides:assets": "node scripts/copy-assets.js",
@@ -32,6 +32,8 @@
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "^10.4.14",
+    "eslint": "9.39.2",
+    "eslint-config-next": "16.1.6",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
     "typescript": "5.0.4"

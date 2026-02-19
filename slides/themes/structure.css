@@ -397,10 +397,16 @@ section.split-columns.inverted .left-content p {
 section.split-columns ul,
 section.split-columns ol {
     padding-left: 1.5em;
+    color: inherit;
 }
 
 section.split-columns li {
     line-height: 1.5;
+    color: inherit;
+}
+
+section.split-columns strong {
+    color: inherit;
 }
 
 /* Links in split columns */
