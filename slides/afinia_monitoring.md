@@ -289,8 +289,6 @@ El objetivo es que la tecnología de la izquierda nos entregue la visibilidad de
 
 ---
 
-# Diagrama de Arquitectura
-
 ```mermaid
 graph TD
     subgraph "Control Plane"

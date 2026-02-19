@@ -5,16 +5,35 @@
     style.id = styleId;
     style.textContent = `
 .mermaid-render {
-  background: var(--overlay, #393552);
-  border: 1px solid var(--highlight-high, #56526e);
-  border-radius: 10px;
-  padding: 12px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   cursor: zoom-in;
+  width: 100%;
+  margin: 0 auto;
 }
 .mermaid-render svg {
   width: 100%;
   height: auto;
   display: block;
+}
+section.mermaid-only {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+section.mermaid-only .mermaid-render {
+  width: 92%;
+}
+@media print {
+  section.mermaid-only .mermaid-render {
+    width: 100%;
+  }
+  section.mermaid-only .mermaid-render svg {
+    width: 100%;
+    height: auto;
+  }
 }
 .mermaid-modal {
   position: fixed;
@@ -426,9 +445,21 @@
         });
 
         if (pre.tagName === 'PRE') {
-            pre.replaceWith(container);
+            pre.classList.add('mermaid-source');
+            pre.setAttribute('data-mermaid-source', 'true');
+            pre.style.display = 'none';
+            pre.insertAdjacentElement('afterend', container);
         } else {
             code.replaceWith(container);
+        }
+        const section = container.closest('section');
+        if (section) {
+          const nonMermaid = Array.from(section.children).filter(
+            (child) => child.tagName !== 'FOOTER' && !child.classList.contains('mermaid-render')
+          );
+          if (nonMermaid.length === 0) {
+            section.classList.add('mermaid-only');
+          }
         }
       } catch (error) {
       }
