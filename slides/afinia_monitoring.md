@@ -222,7 +222,7 @@ Validaremos que las métricas se capturen correctamente y buscaremos su aprobaci
 1. [Confirmar herramientas de monitoreo/APM disponibles](#3)
 1. [Acordar visibilidad de dashboards para el equipo evaluador](#3)
 1. [Configurar monitoreo de aplicación, base de datos e infraestructura](#4)
-1. [Habilitar dashboards y alertas](#8)
+1. [Habilitar dashboards y alertas (Umbrales Visuales)](#8)
 1. [Validar que las métricas se capturan correctamente](#10)
 1. [Confirmar que el monitoreo queda activo y estable](#10)
 1. [Congelar configuración para evitar ajustes durante las pruebas](#10)
@@ -233,6 +233,9 @@ Comenzaremos definiendo qué métricas son críticas para nosotros.
 Luego, confirmaremos que nuestras herramientas (APM, dashboards) están listas y disponibles.
 Un punto clave es acordar qué verán los evaluadores en tiempo real.
 Procederemos a configurar y habilitar todo el stack de monitoreo.
+
+**Nota sobre Alertas:** Aunque el documento oficial menciona "alertas", para una prueba de estrés en tiempo real, esto se traduce en **umbrales visuales (semáforos)** en los dashboards. No configuraremos notificaciones por correo/SMS para evitar ruido, sino que usaremos indicadores de color (Rojo/Amarillo/Verde) para detectar degradación de servicio al instante.
+
 Finalmente, validaremos la captura de datos y congelaremos la configuración para garantizar estabilidad durante las pruebas de estrés.
 -->
 
@@ -360,12 +363,20 @@ La distribución de los usuarios/clientes en tus pruebas de K6 se realiza median
 | **`Estrato_0_1634.json`** | **1,634** clientes | **`proOrden.js`** |
 | **`Estrato_4_1130.json`** | **1,130** clientes | **`updUsu.js`** |
 
+
 <!--
+> **Nota sobre Liquidación:** Aunque el proceso es 100% automatizable, se ejecutará **manualmente** desde el aplicativo (Ciclo 9) para visualizar el comportamiento paso a paso (generación de libros) en paralelo a la carga de fondo.
+
 El plan de pruebas no es improvisado; está definido en un JSON estricto.
 La lógica de distribución de datos es fundamental: usamos Round Robin basado en el ID del VU.
 Esto garantiza que cada hilo virtual tenga un cliente único asignado.
 Por ejemplo, si lanzamos 10 VUs, cada uno tomará un cliente distinto del archivo JSON cargado en memoria compartida.
 Si escalamos más allá de la cantidad de datos (ej. más de 1634 VUs para estrato 0), la asignación dará la vuelta de forma segura.
+
+**Sobre la Liquidación Manual:**
+Hemos decidido deliberadamente ejecutar la liquidación de forma manual desde la aplicación.
+¿Por qué? Porque queremos que ustedes vean "en vivo" cómo la aplicación gestiona el proceso paso a paso (generación de libros, cálculo, etc.) mientras el sistema está bajo estrés.
+Es una demostración de robustez funcional: no solo queremos ver números en un dashboard, queremos ver la aplicación respondiendo ágilmente ante sus ojos.
 -->
 
 ---
@@ -439,7 +450,7 @@ Y el Oracle Exporter está tuneado para extraer métricas vitales como sesiones 
 
 - **Métricas**: Verificación de flujo InfluxDB -> Grafana.
 - **Logs**: Verificación de flujo Promtail -> Loki.
-- **Alertas**: Umbrales configurados para latencia y errores.
+- **Umbrales Visuales**: Colores en dashboards para identificar degradación (Semáforos).
 
 </div>
 
@@ -451,9 +462,6 @@ Y el Oracle Exporter está tuneado para extraer métricas vitales como sesiones 
 - **Monitoreo**: Activo y estable.
 - **Aprobación**: Insumo válido para evaluación.
 
-<div class="highlight-callout">
-Q: ¿Qué pasa si necesitamos cambiar la configuración de monitoreo durante la prueba?
-</div>
 
 </div>
 
@@ -465,24 +473,10 @@ Esto significa que no moveremos más configuraciones de monitoreo durante la pru
 
 ---
 
-# Entregables y Evidencias
+<!-- _class: questions -->
 
-<!-- _class: lead -->
-
-<!--
-Finalmente, revisemos qué entregamos hoy y qué evidencias dejamos.
--->
-
----
-
-# Validación de Visibilidad
-
-1. **Dashboards configurados**: Paneles operativos y accesibles.
-2. **Evidencia de métricas visibles**: Capturas y demostración en vivo.
-3. **Descripción de herramientas**: Alcances definidos.
-4. **Aprobación**: Monitoreo validado por el comité.
-
-<!-- TODO: Insertar captura aquí: Tabla de hallazgos/acciones -->
+Daniel G. Rondón García
+<daniel.rondon@actsis.com>
 
 <!--
 Estos son nuestros criterios de éxito para hoy.
@@ -490,16 +484,7 @@ Dashboards operativos.
 Evidencia visual de que funcionan.
 Claridad en el alcance de las herramientas.
 Y finalmente, su aprobación para usar este sistema como el juez imparcial de nuestras pruebas de rendimiento.
--->
 
----
-
-<!-- _class: questions -->
-
-Daniel G. Rondón García
-<daniel.rondon@actsis.com>
-
-<!--
 Muchas gracias.
 ¿Tienen alguna pregunta sobre la estrategia de monitoreo antes de pasar a la demostración en vivo?
 -->

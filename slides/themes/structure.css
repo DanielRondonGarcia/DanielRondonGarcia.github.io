@@ -152,14 +152,14 @@ section.cool-list.toc h2 {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
     section.cool-list.toc ol {
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 0.5em;
     }
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
     section.cool-list.toc ol {
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 0.4em;
@@ -184,7 +184,7 @@ section.cool-list.toc h2 {
     }
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
     section.cool-list.toc ol {
         grid-template-columns: 1fr;
         gap: 0.3em;
@@ -268,7 +268,7 @@ section.lead::before {
 }
 
 /* Responsive adjustments for lead */
-@media (max-width: 980px) {
+@media screen and (max-width: 980px) {
     section.lead h1 {
         font-size: 3em;
         max-width: 90%;
@@ -276,7 +276,7 @@ section.lead::before {
     }
 }
 
-@media (max-width: 640px) {
+@media screen and (max-width: 640px) {
     section.lead h1 {
         font-size: 2.5em;
         max-width: 95%;
@@ -503,7 +503,7 @@ section.split-columns .highlight-callout:hover::before {
 }
 
 /* Responsive adjustments */
-@media (max-width: 980px) {
+@media screen and (max-width: 980px) {
     section.split-columns {
         flex-direction: column;
         height: auto;
@@ -550,7 +550,7 @@ section.split-columns .highlight-callout:hover::before {
     }
 }
 
-@media (max-width: 640px) {
+@media screen and (max-width: 640px) {
     section.split-columns .left-content,
     section.split-columns .right-content {
         padding: 1em;
@@ -635,7 +635,7 @@ section.questions strong {
 }
 
 /* Responsive adjustments for questions section */
-@media (max-width: 980px) {
+@media screen and (max-width: 980px) {
     section.questions {
         padding: 40px 60px 40px 30%;
         background-size: cover;
@@ -655,7 +655,7 @@ section.questions strong {
     }
 }
 
-@media (max-width: 640px) {
+@media screen and (max-width: 640px) {
     section.questions {
         padding: 30px 40px;
         background-size: cover;
@@ -674,5 +674,26 @@ section.questions strong {
     
     section.questions p {
         font-size: 1.2em;
+    }
+}
+
+@media print {
+    section.split-columns {
+        display: table !important;
+        table-layout: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        break-inside: avoid !important;
+    }
+    
+    section.split-columns .left-content,
+    section.split-columns .right-content {
+        display: table-cell !important;
+        width: 50% !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
     }
 }
