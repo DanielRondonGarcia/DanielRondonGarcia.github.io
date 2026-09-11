@@ -40,6 +40,18 @@ const Projects = () => {
       title: "nextjs-devcontainer",
       description: "🐋 Fully-Dockerised Nextjs - postgress development in Visual Studio Code",
       url: "https://github.com/DanielRondonGarcia/nextjs-devcontainer"
+    },
+    {
+      icon: "fa-brands fa-docker",
+      title: "docker-volume-backup",
+      description: "Centralized backup and restore system for Docker volumes with a Control Plane and Workers architecture.",
+      url: "https://github.com/DanielRondonGarcia/docker-volume-backup"
+    },
+    {
+      icon: "fa-brands fa-github",
+      title: "unittcms",
+      description: "Open-source test case management system designed for self-hosted use and strict security requirements.",
+      url: "https://github.com/DanielRondonGarcia/unittcms"
     }
   ];
 

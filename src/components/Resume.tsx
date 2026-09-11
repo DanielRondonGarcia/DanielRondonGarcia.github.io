@@ -13,7 +13,7 @@ const Resume = () => {
 
           <Timeline title="Summary">
             <TimelineItem title={typeof process.env.NEXT_PUBLIC_NAME === 'string' ? process.env.NEXT_PUBLIC_NAME.replace(/"/g, '').trim() : 'RIKAM PALKAR'}>
-              <p className="mb-4">DevOps and SRE with +3 years in CI/CD, automation, and vulnerability detection. Studying a master's in Cybersecurity. Collaborate in agile teams, passionate about efficiency, with QA experience and focus on continuous improvement.</p>
+              <p className="mb-4">DevOps and SRE with +3 years in CI/CD, automation, and vulnerability detection. Completed a university master&apos;s degree in Cybersecurity. Collaborate in agile teams, passionate about efficiency, with QA experience and focus on continuous improvement.</p>
               <ul className="list-disc list-inside">
                 <li>Bucaramanga, CO</li>
                 <li>{process.env.NEXT_PUBLIC_EMAIL}</li>
@@ -30,7 +30,7 @@ const Resume = () => {
             </TimelineItem>
             <TimelineItem
               title="MAESTRÍA OFICIAL EN CIBERSEGURIDAD"
-              period="2024 - Present"
+              period="2024 - Completed"
               location="Universidad Internacional de Valencia, España">
               <p>Auditing of information systems, Governance and management of information technologies, Development and implementation of systems, Protection of information assets.</p>
             </TimelineItem>
