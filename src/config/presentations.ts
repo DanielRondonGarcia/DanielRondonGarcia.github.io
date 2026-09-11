@@ -34,6 +34,16 @@ export const presentations: PresentationConfig[] = [
     hidden: true,
     createdAt: '2026-02-18',
     updatedAt: '2026-02-18'
+  },
+  {
+    id: 'docker',
+    title: 'Docker: de la imagen al taller',
+    category: 'DEVOPS',
+    description: 'Fundamentos de Docker, Docker CLI y taller local',
+    tags: ['devops', 'docker', 'contenedores'],
+    image: '/images/docker.png',
+    createdAt: '2026-09-11',
+    updatedAt: '2026-09-11'
   }
 ];
 
