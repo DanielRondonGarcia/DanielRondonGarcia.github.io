@@ -40,7 +40,7 @@ Fundamentos, Docker CLI y un ejemplo práctico
 <!--
 Objetivo de esta primera parte: construir el modelo mental mínimo para trabajar
 con Docker y crear un contenedor a partir de una imagen.
---> 
+-->
 
 <!--
 NOTAS DEL ORADOR
